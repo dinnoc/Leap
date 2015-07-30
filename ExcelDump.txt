@@ -1,0 +1,17 @@
+﻿    Sub dumpDataTableToExcel(ByVal dt As dsBatch.BatchDetailsDataTable)
+
+        Dim context As HttpContext = HttpContext.Current
+        context.Response.Clear()
+        Dim col As Integer = 0
+
+        Do Until col = dt.Columns.Count
+            context.Response.Write(dt.Columns(col).ColumnName & ";")
+            col = col + 1
+        Loop
+
+
+
+
+
+
+    End Sub

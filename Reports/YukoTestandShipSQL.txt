@@ -1,0 +1,20 @@
+﻿
+select b.BatchNumber,b.BatchTrimmed,c.TPCOrderNo,d.FirstMandecDate,a.enddate as FinalQCTestDate,c.TILFinalApprovalDate as FinalApprovalDate ,
+c.TPCConfirmedCollectionDate,c.AuditComment, e.FirstLimsApprovalDate, a.spcbatchid , a.startdate as QCTestStartDate 
+
+ from 
+	
+		(Select spcbatchid, enddate, startdate from LeaP_RouteData 
+		where wkCentreCompleteTrans = 65 and EndDate > '05/13/2011' and EndDate < '07/13/2011') a 
+		
+		inner join LeaP_spcBatches b on a.spcbatchid = b.spcBatchID 
+		
+		inner join LeaP_ShipPlanCom c on b.spcID = c.spcID 
+		
+		left outer join (select MIN(transdate) as FirstMandecDate, max(transdate) as LastMandecDate, batchid 
+		from LeaP_Transactions where transtype = 40 group by batchid) d on b.BatchTrimmed = d.BatchID 
+		
+		left outer join (select MIN(transdate) as FirstLimsApprovalDate, max(transdate) as LastMandecDate, batchid 
+		from LeaP_Transactions where transtype = 65 group by batchid) e on b.BatchTrimmed = e.BatchID 
+		
+	

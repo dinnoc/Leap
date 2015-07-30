@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BWI">
+  <DataContextMoniker Name="/BWIDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5a94e83a-ff5a-4ed5-b695-8c0259459280" absoluteBounds="0.625, 0.875, 2, 1.4386783690253895">
+      <DataClassMoniker Name="/BWIDataContext/LeaP_BWIHeader" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8facb0a-0a55-4193-bd2c-fc4e63464141" absoluteBounds="0.64000000000000012, 1.335, 1.9700000000000002, 0.87867836902538943" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="502d6186-d73f-496c-b5a5-23260a724b7e" absoluteBounds="2.875, 0.875, 2, 1.4386783690253895">
+      <DataClassMoniker Name="/BWIDataContext/LeaP_BWILot" />
+      <nestedChildShapes>
+        <elementListCompartment Id="053327fc-41ca-4554-a12f-030b776671a8" absoluteBounds="2.89, 1.335, 1.9700000000000002, 0.87867836902538943" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Menu"  description="">
+      <siteMapNode url="" title =" Admin">
+      <siteMapNode url="SPCUpload.aspx" title="Upload ShipPlanCom"  description="" />
+      <siteMapNode url="~\admin\ItemMaster.aspx" title="Item Master"  description="Item Master" />
+      <siteMapNode url="~\admin\RoutingMaster.aspx" title="Route Master"  description="Route Master" />
+      <siteMapNode url="~\admin\Calendar.aspx" title="Factory Calendar"  description="Factory Calendar" />
+      <siteMapNode url="InterfaceScraper.aspx" title="Interface Run"  description="" />
+      <siteMapNode url="~\reports\InterfaceRunReport.aspx" title="Interface Details"  description="" />
+        <siteMapNode url="~\admin\CommentMaster.aspx" title="Comment Master"  description="" />
+        <siteMapNode url="~\admin\forcetransactiondate.aspx" title="Force Transaction"  description="" />
+        <siteMapNode url="10wkPlanUpload.aspx" title="Upload 10wk Plan"  description="" />
+      </siteMapNode>
+
+      <siteMapNode url="" title =" Reports">
+
+        <siteMapNode url="~\reports\spcsummaryfullview.aspx" title="Ship Plan Com Status"  description="Ship Plan Com Status" />
+        <siteMapNode url="~\reports\WorkCentrePerformance.aspx" title="Work Centre Performance"  description="Work Centre Performance" />
+        <siteMapNode url="~\reports\BatchView.aspx" title="Batch View"  description="Batch View" />
+        <siteMapNode url="~\reports\TestAndShip.aspx" title="Test and Ship"  description="Test and Ship" />
+        <siteMapNode url="~\reports\QCcompreport.aspx" title="QC Compression View"  description="" />
+        <siteMapNode url="~\reports\packmgmtreport.aspx" title="Packaging Mgmt Report"  description="" />
+        <siteMapNode url="~\reports\TestAndShipExcelData.aspx" title="Test And Ship for Excel"  description="" />
+        <siteMapNode url="~\reports\MPSShedulePerformance.aspx" title="MPS Performance"  description="" />
+        <siteMapNode url="~\reports\MPSExcelReport.aspx" title="MPS Excel Report"  description="" />
+        <siteMapNode url="~\reports\ShippingReport.aspx" title="Shipping Report"  description="" />
+        <siteMapNode url="~\reports\ExceptionReport.aspx" title="Exception Report"  description="" />
+
+      </siteMapNode>
+        </siteMapNode>
+ 
+  
+  
+</siteMap>

@@ -1,0 +1,2 @@
+﻿Only calculates for batches which have shipped transactions on the system
+

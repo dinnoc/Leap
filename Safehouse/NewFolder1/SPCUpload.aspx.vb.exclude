@@ -1,0 +1,307 @@
+﻿Imports System.Data.OleDb
+Imports System.Data
+Imports System.IO
+
+Partial Class _Default
+    Inherits System.Web.UI.Page
+    Public dt As System.Data.DataTable
+    Public alphaArr(52) As Char
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+  
+    End Sub
+    Protected Sub btnRoutings_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRoutings.Click
+        Call GenerateRoutings()
+    End Sub
+
+    Protected Sub btnGetData_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGetData.Click
+        '  clear()
+        getdata()
+        GenerateRoutings()
+    End Sub
+#Region "Consume Spreadsheet"
+
+    Sub getdata()
+
+        Call loadAlphaArray()
+
+        Dim path As String = Server.MapPath("spcuploads\spcexamplecutcsv.csv")
+        Dim sr As New StreamReader(path)
+
+        While Not sr.EndOfStream
+
+            Dim arrSPC() As String
+            Dim strSPC As String = sr.ReadLine()
+            arrSPC = strSPC.Split(",")
+            Call spc_insert_new_line(arrSPC)
+
+        End While
+
+
+    End Sub
+
+#End Region
+#Region "Insert new line"
+
+
+    Sub spc_insert_new_line(ByVal arrspc() As String)
+
+        'FILL ALL THE VARIABLES FOR THE INPUT
+        Dim TPCOrdNo As String = arrspc(2)
+        '--
+        Dim TILFinalApproval As Date = Nothing
+        If Not IsDBNull(arrspc(5)) Then
+            TILFinalApproval = arrspc(5)
+        End If
+        '--
+        Dim TPCConfirmedCollectionDate As Date = Nothing
+        If Not IsDBNull(arrspc(7)) Then
+            TPCConfirmedCollectionDate = arrspc(7)
+        End If
+        '--
+        Dim itemcode As String = arrspc(8) & arrspc(9)
+        '--
+        Dim TPCOrderQuantity As Integer = arrspc(12)
+        '--
+        Dim TILShippingMemoDate As Date
+        Dim TILShippingMemoDateType As Type = arrspc(6).GetType
+        If TILShippingMemoDateType.FullName = "System.String" Then
+            TILShippingMemoDate = DateTime.FromOADate(CDbl(arrspc(6)))
+        ElseIf TILShippingMemoDateType.FullName = "System.Date" Then
+            TILShippingMemoDate = arrspc(6)
+        End If
+        '--
+        Dim adapSPC As New ShipPlanComTableAdapters.QueriesTableAdapter
+
+
+        Dim spcline As Integer
+        adapSPC.InsertSPCLine(itemcode, TPCOrderQuantity, TILFinalApproval, TILShippingMemoDate, TPCConfirmedCollectionDate, TPCOrdNo, 1, spcline)
+
+
+        Dim adapBatch As New ShipPlanComTableAdapters.LeaP_spcBatchesTableAdapter
+
+        Dim d As Char = Chr(10)
+
+        Dim tilPlannedlot As String = Nothing
+        Dim arrLot() As String = Nothing
+        If Not IsDBNull(arrspc(14)) Then
+            tilPlannedlot = arrspc(14)
+            arrLot = Split(tilPlannedlot, d)
+        End If
+
+
+        Dim arrQty() As String = Nothing
+        Dim TILPlannedQuantity As String = Nothing
+
+        If Not IsDBNull(arrspc(13)) Then
+            If Not arrspc(13) Like "*TBA*" Or arrspc(13) = "" Then
+                TILPlannedQuantity = arrspc(13)
+                arrQty = Split(TILPlannedQuantity, d)
+            End If
+        End If
+
+
+        If Not arrLot Is Nothing Then
+            'if there are no lots dont add anything
+            Dim i As Integer = 0
+            Do Until i = arrLot.Count
+
+                Dim lot As String = arrLot(i)
+                Dim alphaIndex As Integer = lot.IndexOfAny(alphaArr)
+                lot = lot.Remove(alphaIndex, Len(lot) - alphaIndex)
+
+                If arrQty Is Nothing Then
+                    'if there are no qtys for lots just put a 0
+                    adapBatch.Insert(arrLot(i), spcline, 0, lot)
+                Else
+                    'if there is qty for a lot put it against the lot
+                    adapBatch.Insert(arrLot(i), spcline, arrQty(i), lot)
+                End If
+                i = i + 1
+            Loop
+
+        End If
+
+        'add to item master table if not already there
+        Try
+
+
+            Dim adapItem As New RoutingsTableAdapters.LeaP_ItemMasterTableAdapter
+            adapItem.Insert(itemcode, 1, arrspc(10) & arrspc(11))
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+#End Region
+#Region "Update Line"
+
+
+    Sub spc_update_line(ByVal countrow As Integer, ByVal spcid As Integer)
+
+        Dim TPCOrdNo As String = dt.Rows(countrow).Item(2)
+        '--
+        Dim TILFinalApproval As Date = Nothing
+        If Not IsDBNull(dt.Rows(countrow).Item(5)) Then
+            TILFinalApproval = dt.Rows(countrow).Item(5)
+        End If
+        '--
+        Dim TPCConfirmedCollectionDate As Date = Nothing
+        If Not IsDBNull(dt.Rows(countrow).Item(7)) Then
+            TPCConfirmedCollectionDate = dt.Rows(countrow).Item(7)
+        End If
+        '--
+        Dim itemcode As String = dt.Rows(countrow).Item(8) & dt.Rows(countrow).Item(9)
+        '--
+        Dim TPCOrderQuantity As Integer = dt.Rows(countrow).Item(12)
+        '--
+        Dim TILShippingMemoDate As Date
+        Dim TILShippingMemoDateType As Type = dt.Rows(countrow).Item(6).GetType
+        If TILShippingMemoDateType.FullName = "System.String" Then
+            TILShippingMemoDate = DateTime.FromOADate(CDbl(dt.Rows(countrow).Item(6)))
+        ElseIf TILShippingMemoDateType.FullName = "System.DateTime" Then
+            TILShippingMemoDate = dt.Rows(countrow).Item(6)
+        End If
+
+        Dim adapSPC As New ShipPlanComTableAdapters.QueriesTableAdapter
+
+        adapSPC.UpdateSPCLine(itemcode, TPCOrderQuantity, TILFinalApproval, TILShippingMemoDate, TPCConfirmedCollectionDate, TPCOrdNo, spcid)
+
+        'delete exisiting batches for spcline
+        adapSPC.DeleteBatchesBySPCID(spcid)
+
+        'recreate the batches
+        Dim adapBatch As New ShipPlanComTableAdapters.LeaP_spcBatchesTableAdapter
+
+        Dim d As Char = Chr(10)
+
+        Dim tilPlannedlot As String = Nothing
+        Dim arrLot() As String = Nothing
+        If Not IsDBNull(dt.Rows(countrow).Item(14)) Then
+            tilPlannedlot = dt.Rows(countrow).Item(14)
+            arrLot = Split(tilPlannedlot, d)
+        End If
+
+
+        Dim arrQty() As String = Nothing
+        Dim TILPlannedQuantity As String = Nothing
+
+        If Not IsDBNull(dt.Rows(countrow).Item(13)) Then
+            If Not dt.Rows(countrow).Item(13) Like "*TBA*" Or dt.Rows(countrow).Item(13) = "" Then
+                TILPlannedQuantity = dt.Rows(countrow).Item(13)
+                arrQty = Split(TILPlannedQuantity, d)
+            End If
+        End If
+
+
+        If Not arrLot Is Nothing Then
+            'if there are no lots dont add anything
+
+
+
+            Dim i As Integer = 0
+            Do Until i = arrLot.Count
+
+                Dim lot As String = arrLot(i)
+                Dim alphaIndex As Integer = lot.IndexOfAny(alphaArr)
+                lot = lot.Remove(alphaIndex, Len(lot) - alphaIndex)
+
+
+                If arrQty Is Nothing Then
+                    'if there are no qtys for lots just put a 0
+                    adapBatch.Insert(arrLot(i), spcid, 0, lot)
+                Else
+                    'if there is qty for a lot put it against the lot
+                    adapBatch.Insert(arrLot(i), spcid, arrQty(i), lot)
+                End If
+                i = i + 1
+            Loop
+
+        End If
+
+    End Sub
+#End Region
+#Region "helpers"
+
+
+    Sub clear()
+        Dim myadap As New ShipPlanComTableAdapters.QueriesTableAdapter
+        myadap.DeleteBatches()
+        myadap.DeleteSPC()
+    End Sub
+
+    Sub loadAlphaArray()
+        Dim y As Integer = 0
+        Dim n As Integer
+        For n = 65 To 90
+            Dim d As Char = Chr(n)
+            alphaArr.SetValue(d, y)
+            y = y + 1
+        Next
+        For n = 97 To 122
+            Dim d As Char = Chr(n)
+            alphaArr.SetValue(d, y)
+            y = y + 1
+        Next
+    End Sub
+
+
+#End Region
+#Region "Calc routings"
+
+
+    Sub GenerateRoutings()
+        Dim adapQ As New RoutingsTableAdapters.QueriesTableAdapter
+        adapQ.DeleteRouteData()
+
+        'get all the batches which require routings (perhaps this can be set to only batches which have not shipped or do not have work orders available?)
+        Dim adap As New dsBatchTableAdapters.BatchDetailsTableAdapter
+        Dim dt As New dsBatch.BatchDetailsDataTable
+
+        dt = adap.GetData()
+
+        For Each row As dsBatch.BatchDetailsRow In dt
+
+            Call routeit(row)
+
+        Next
+        'for each batch generate a routing
+    End Sub
+
+    Sub routeit(ByVal row As dsBatch.BatchDetailsRow)
+
+        'get the routing for this item
+        Dim adapRouteCalc As New RoutingsTableAdapters.RouteCalcDetailsTableAdapter
+        Dim dtRouteCalc As New Routings.RouteCalcDetailsDataTable
+        dtRouteCalc = adapRouteCalc.GetData(row.ItemCode)
+
+        'fill in the RouteData Table with the information
+        Dim enddate As Date = row.TILFinalApprovalDate
+        Dim nextWorkCentre As Integer
+        Dim adapRouteData As New RoutingsTableAdapters.LeaP_RouteDataTableAdapter
+
+        'set the routing for shipment for the specific batch
+        adapRouteData.Insert(row.spcBatchID, 5, row.TPCConfirmedCollectionDate, row.TPCConfirmedCollectionDate, 80, 0)
+        nextWorkCentre = 5
+
+        For Each rowCalc As Routings.RouteCalcDetailsRow In dtRouteCalc
+            Dim startdate As Date = DateAdd(DateInterval.Hour, -rowCalc.TotalDuration, enddate)
+            adapRouteData.Insert(row.spcBatchID, rowCalc.WorkCentreID, startdate, enddate, rowCalc.WorkCentreCompleteTransaction, nextWorkCentre)
+            enddate = startdate
+            nextWorkCentre = rowCalc.WorkCentreID
+        Next
+
+    End Sub
+
+#End Region
+#Region "Presentation Handlers"
+
+
+
+  
+
+#End Region
+
+
+
+End Class

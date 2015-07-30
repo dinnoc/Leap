@@ -1,0 +1,40 @@
+﻿SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, LeaP_Transactions.TransDate, LeaP_TransactionTypes.Description, 
+               LeaP_WorkCentre.WorkCentreCompleteTransaction, LeaP_Transactions.BatchID
+FROM  LeaP_WorkCentre INNER JOIN
+               LeaP_RouteData ON LeaP_WorkCentre.WorkCentreID = LeaP_RouteData.WorkCentreID LEFT OUTER JOIN
+               LeaP_TransactionTypes ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_TransactionTypes.TransactionTypes RIGHT OUTER JOIN
+               LeaP_spcBatches ON LeaP_RouteData.spcBatchID = LeaP_spcBatches.spcBatchID RIGHT OUTER JOIN
+               LeaP_ShipPlanCom ON LeaP_spcBatches.spcID = LeaP_ShipPlanCom.spcID LEFT OUTER JOIN
+               LeaP_Transactions ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_Transactions.TransType AND 
+               LeaP_Transactions.BatchID LIKE { fn CONCAT(LeaP_spcBatches.BatchNumber, '%') }
+WHERE (LeaP_spcBatches.spcID = @spcid) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction < 50)
+UNION
+SELECT LeaP_ShipPlanCom_1.TPCOrderNo, LeaP_spcBatches_1.BatchNumber, LeaP_RouteData_1.StartDate, LeaP_RouteData_1.EndDate, 
+               LeaP_WorkCentre_1.WorkCentreDesc, LeaP_Transactions_1.TransDate, LeaP_TransactionTypes_1.Description, 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction, LeaP_Transactions_1.BatchID
+FROM  LeaP_WorkCentre AS LeaP_WorkCentre_1 INNER JOIN
+               LeaP_RouteData AS LeaP_RouteData_1 ON LeaP_WorkCentre_1.WorkCentreID = LeaP_RouteData_1.WorkCentreID LEFT OUTER JOIN
+               LeaP_TransactionTypes AS LeaP_TransactionTypes_1 ON 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction = LeaP_TransactionTypes_1.TransactionTypes RIGHT OUTER JOIN
+               LeaP_spcBatches AS LeaP_spcBatches_1 ON LeaP_RouteData_1.spcBatchID = LeaP_spcBatches_1.spcBatchID RIGHT OUTER JOIN
+               LeaP_ShipPlanCom AS LeaP_ShipPlanCom_1 ON LeaP_spcBatches_1.spcID = LeaP_ShipPlanCom_1.spcID LEFT OUTER JOIN
+               LeaP_Transactions AS LeaP_Transactions_1 ON LeaP_WorkCentre_1.WorkCentreCompleteTransaction = LeaP_Transactions_1.TransType AND 
+               LeaP_Transactions_1.BatchID LIKE { fn CONCAT(LeaP_spcBatches_1.BatchTrimmed, '%') }
+WHERE (LeaP_WorkCentre_1.WorkCentreCompleteTransaction > 50) AND (LeaP_spcBatches_1.spcID = @spcid)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreDesc
+
+
+
+
+
+
+
+
+Select MAX(transtype) from LeaP_Transactions
+where BatchID like '@batchIdTrimmed' + '%'
+
+
+
+
+

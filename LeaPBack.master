@@ -1,0 +1,78 @@
+﻿<%@ Master Language="VB" CodeFile="LeaPBack.master.vb" Inherits="LeaPBack" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style3
+        {
+            color: #009900;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+            <table class="style1">
+                <tr>
+                    <td width="50%">
+                <h2>          <span class="style3">LeaP Prototype Version 4</span>   </h2></td>
+                    <td align="left" valign="top">
+                        <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" 
+                            ExpandDepth="0" ImageSet="Arrows">
+                            <ParentNodeStyle Font-Bold="False" />
+                            <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                            <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" 
+                                HorizontalPadding="0px" VerticalPadding="0px" />
+                            <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" 
+                                HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                        </asp:TreeView>
+                        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                    </td>
+                    <td align="left" valign="top">
+                        &nbsp;</td>
+                </tr>
+                </table>
+     
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        
+        
+        
+        
+        
+        
+        
+            <table class="style1">
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+            </table>
+        
+        
+        
+        
+        
+        
+        
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

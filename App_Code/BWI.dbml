@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="LEAPPROD111208" Class="BWIDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=TILJD20081802\SQLEXPRESS;Initial Catalog=LEAPPROD111208;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LeaPDevConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.LeaP_BWIHeader" Member="LeaP_BWIHeaders">
+    <Type Name="LeaP_BWIHeader">
+      <Column Name="bwiID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PRNumber" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Creator" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LeaP_BWILots" Member="LeaP_BWILots">
+    <Type Name="LeaP_BWILot">
+      <Column Name="bwiLotID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="bwiLotNumber" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="ContainerIDs" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="bwiID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertBWI" Method="InsertBWI">
+    <Parameter Name="PRNumber" Parameter="pRNumber" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="Creator" Parameter="creator" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="CreatedDate" Parameter="createdDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="bwiID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

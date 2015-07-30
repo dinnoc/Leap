@@ -1,0 +1,54 @@
+﻿<%@ Master Language="VB" CodeFile="PLT.master.vb" Inherits="PLT" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style2
+        {
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table class="style1">
+            <tr>
+                <td class="style2" colspan="3">
+                    <h1>
+                        PLANT LEAD TIME<asp:ScriptManager ID="ScriptManager1" runat="server">
+                        </asp:ScriptManager>
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="style2">
+                    <a href="PLTCalculator.aspx">PLTCalculator</a></td>
+                <td class="style2">
+                    <a href="PLTInterfaceScraper.aspx">PLTInterfaceScraper.aspx</a></td>
+                <td class="style2">
+                    <a href="PLTRouting.aspx">PLTRouting</a></td>
+                      <td class="style2">
+                    <a href="PLTRawMatsReport.aspx">PLT Raw Mats</a></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="InterfaceScraper.aspx.vb"  MasterPageFile ="~/LeaPBack.master" Inherits="RunInterfaceScraper" %>
+
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <div>
+    
+        <table class="style1">
+            <tr>
+                <td>
+                   <h4>Interface Run Page</h4></td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+                    <br />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Label ID="Label1" runat="server"></asp:Label>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <br />
+                    <br />
+                    <asp:Button ID="BtnRunInterface" runat="server" Text="Run Interface" />
+                    
+                    
+                    
+                    
+                    
+                    <br />
+                    <br />
+                    
+                    
+                    
+                    
+                    
+                    <br />
+                    <asp:Button ID="btnLotInt" runat="server" Text="Run Lot Interface" visible = false/>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <asp:Button ID="Button1" runat="server" visible = false
+                        Text="Archive interface do not click this" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    
+                    
+                    
+                    
+                    
+                    <asp:Button ID="btnCleanUp" runat="server"  visible = false
+                        Text="Don't click this unless you know what it does" />
+                    
+                    
+                </td>
+            </tr>
+        </table>
+    
+    </div></asp:Content>
+

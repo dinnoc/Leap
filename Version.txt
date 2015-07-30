@@ -1,0 +1,385 @@
+﻿Version 1.0
+
+Original go live version in 
+
+Version 1.1
+
+installation
+
+1) Add leap_xfp_lots table to database
+
+Changes
+
+1) Added functionality to grab lots table from xfp and store in LeaP DB
+2) added close function on details view for batchworkcentrestatus report
+
+
+version 1.2
+
+Installation
+
+1) Add table leap_shipplancomaudit to database
+2) Add columnts AuditChangeDate and AuditUser to leap_shipPlancom
+2) Add trigger SPCupdate and SPCInsert to leap_shipplancom table
+3) Update InsertSPCline and updateSPCLine
+4) full copy of website files
+
+Changes
+
+1) added audit trail functionlity on shipplancom upload
+2) Enabled inserting of a new routing
+
+Version 1.3
+
+installation
+
+1) Add tables PLT_Calculator, PLT_Transactions and PLT_Interfacefiles to database
+2) view viewTransactionsWithFirstDisp to database
+3) Add field id int to the leap_xfp_lots table
+4) Add two fields to spcbatches table, set all values in highest trans field to 0
+5) Add table PLT_Routings and PLT_RouteHeader
+6) Add viewBatchCurrentStatusPackBulk
+7) Add viewIntermediateStatus
+3) Full copy of website files
+
+Changes
+
+1) Added plant lead time functionality - need to go back and integrate this functionality with LeaP interface system
+2) Added functionality to allow for in table editing of item routing
+3) Updated BathcWorkCentreStatus table to ensure all batch nos are shown even if there isnt a transaction
+4) Fixed bug where a single quantity for a batch was being interpreted as a double and couldnt be compared to "TBA"
+5) Fixed bug where S was showing in status rather than A
+6) Added calendar to allow for calculation of working days in routings (at the moment only one calendar for the site)
+7) Updated routing calculation to take account of working days NOTE: duration in routing now needs to be in days not hours
+8) Changed the way highest transaction is recorded to update after interface runs
+9) Updated PLT functionality to allow for PLT route to be defined and for multiple items at the same level
+10) Updated PLT calcualtion page to select the route and output data to grid (to excel)
+11) added a workcentre performance page
+
+Version 1.4
+
+Installation
+
+Full copy of website files
+
+udpates
+
+1. Change the way the interface scraper worked for PLT to only read data from XFP once into system and then read from internal table
+2. Changed logic aroudn XFP_lots interface to update existing lots and add new lots instead of deleteing the table and inserting everything
+3. Added a description table to output plain descriptions to the PLT calculator output
+-----------------------------
+Version 1.5
+
+Installation
+
+full copy of website files
+
+updates
+
+1.updated batchworkcentrestatuspackandbulk to allow for filtering out shipped lots and sorted by collection date
+
+NOTE: to deal with access to interface issues you need to update the anonymous user password in IIS on TIL-km-01 to the new dinnissj password.
+------------------------------
+Version 1.6
+
+Installation
+
+1. Update spcBatches with 4 columns tabletpress nvarchar(10), granulator nvarchar(10), MPSdate (date),
+MPS week (int), MPSyear (int)
+2. full copy of website files
+
+Updates
+
+1. Added functionality to upload 10wk plan
+2. Added test and ship report
+
+Version 2.0
+
+Installation
+
+1) Check the TNSnames file on the server to ensure it has the trackwise and lims services in it
+2) udpate Leap_workcetnre with line 9, QC Testing,65
+3) insert leap_transactiontypes line 65, QC testing complete
+4) insert Leap_interfacefiles line 5, QCLims, 01/01/2011
+5) insert leap_interfacefiles line 6, XFP_Status, 01/01/2007 - done
+5.5) Add table xfp_status_change to db - done
+5) full copy of website files
+6) run the archive version of xfp_status_change scraper (archxfpscraper.aspx)
+7) reset the min date in xfp_interfacefiles for item 6 to 01/01/2007
+8) run the production version of the xfp_status_change scraper
+8) remove all PLT transactions and run interface for PLT back to 01/01/2007
+
+
+Updates
+
+1) Added functionality to get approval date from LIMS system
+2) Updated max transaction finder to allow for case where QC may happen before packaging to ensure the the apprpopriate 
+ transaction is chosen as the current max ie: 
+    if qctest but no pack then highest trans should be the last transaction on the bulk
+    if qctest and pack but no further action then highest trans should be qc test
+    if qctest and there are actions past pack then highest trans should be the transaction past pack
+3) updated plantleadtime to include transaction scraper for XFP_status_change and to use this data 
+to get the status change date for the batch rather than the lots table which has the incorrect data if the lot is 
+in status s (obsolete)
+4) fixed bug in SPCupload which was stopping data uploading if the arrqty array was nothing.
+
+
+version 2.1
+
+Installation
+
+1) add AuditComment nvarchar(200) to Leap_shipPlanCom table
+1) add AuditComment nvarchar(200) to Leap_shipPlanComAudit table
+2) Full copy of website files
+
+changes
+
+1) Fixed bug with setting highest transaction to ensure that highest transaction is in the routing
+2) change the highest transaction update to only update those batches which are not shipped
+3) Re wrote SPC summary report to ensure all batches are included (view is now obsolete)
+4) General tidy up of files in app
+5) changed interface scraper so only shipments which are "00%" will be accepted, ie no 1901 shipments will be accepted
+6) updated SPCupload to ensure that the last row of the spreadsheet gets read into the shipplancom table (was missing it before)
+7) update spcupload to trim whitespace from beginning and end of string
+8) added editing and inserting functionality on SPC and SPC Batches management page
+9) added function to see lot history from workcentre performance page
+10)tried to fix date issues with workcentre performance report and QC compression report as date format is different on server mm/dd/yyyy vs my machine dd/mm/yyyy
+
+
+
+version 2.2
+
+1) Fixed multiple date formats to english dates
+2) Sorted spcfullview by confirmed collection date
+3) Removed the modal pop up box from deleting a line in SPC management.  Causing bug on server.
+
+Version 2.3
+
+Installation
+
+1) Run query - insert into leap_interfacefiles values (7,'Rec1901','06/01/2010')
+2) Run query - Insert into leap_workcentre values (10,'Receipt of Tabs' , 20)
+3) install web files
+4) update routings for purchased tabs to include receipt of tabs workcentre, run routings and interface
+5) Reupload the 04-2011 SPC reset file to update the shipping memo dates with the correct dates per bug fix 7) below
+6) Run routings generator and interface update after reloading ship plan com
+7) Run Query - insert into LeaP_TransactionTypes values (20, 'Imported Tablet Recieved')
+8) Run Query - insert into LeaP_TransactionTypes values (0, 'To start')
+
+
+updates
+
+1) changed logic around displaying traffic lights to take account of various date formats over servers.  Commented text in 
+workcentre performance and spcfullview display sections to be removed
+2) updated date formats in shipPlanComupload on both grid and details view for editing. To be tested on prod server dev environment.
+3) Added function to manually add a new item code to item master and check if item code is alreay used
+4) Set default highesttranstype = 0 for bathches which are manually created.  Bug related to batches not showing up in spcfullview table
+5) Added receipt consumption for 1901 tablets.
+6) Added report for Packaging managmenet to show packaging orders and status of input tablets.
+7) Fixed bug with shipping memo date = final approval date - was looking at wrong column in spreadsheet
+8) Added report showing interface last run time and date
+9) Updated the QC compression report so dates work correctly.
+
+
+Version 3.0
+
+installation
+
+1) insert lines into workcentre table
+
+11	    Granulation - capacity only	    -1
+12	    Blend - capacity only	        -1
+
+2) add column processduration decimal(5,1) to leap_routedata table
+3) Add column to leap_itemmaster
+    - Multiplier1 decimal(10,2) 
+    - Multiplier2 decimal(10,2)
+    - Divisor1 decimal(10,2)
+    - Divisor2 decimal(10,2)
+    - blisterLine nvarchar(10)
+4) Run the following query
+       update Leap_itemMaster set Multiplier1 =1,Multiplier2=1,Divisor1=1,Divisor2=1 
+3) full copy of website files
+4) add new workcentres to routings and re run routings set up
+5) Run: insert into LeaP_InterfaceFiles values (8,'Sampling','01/01/2007')
+5) Run: Insert into PLT_TransactionDescription values (15, '15 - Raw Mats Sampling')
+6) run archive version of sampling interface
+
+
+
+udpates
+
+1) Fixed bug with inserting a new lot where highest trans type was null and hence wasnt showing up in spc report...                ...again
+2) Added capacity planning function changes include
+    - update to allow planning of intermediate processes like gran and blend
+    - updates to ignore intermediate processes in detail reporting ie: any process with a wkctrcompletetrans of -1 is ignored
+    - update to insert into the route data table the process duration for each batch as it is created
+    - report which shows total time allocated to a workcentre for all UNIQUE batches in route data table sorted by month (some batches may be duplicate if they are split over more than one order)
+    - query explanation - get a table with the minimum start date and average duration by workcentre for each unique batchNo.  Use this to do the duration calculation.
+3) Added update to PLT to include sampling date for each lot
+   
+   
+   
+Version 3.1
+
+1) Fixed bug where the highest trans update wasnt updating the columns with a null value.  Added search for null value to query
+2) Fixed bug with sorting of the ship plan com gridview 
+
+Version 3.2
+
+1) Fixed bug with null value in highest trans box causing error.  
+2) fixed bug with date time conversion for Lims interface. 
+
+Version 3.3
+
+1) updated PLT to allow for multiple item codes at the same level of the routing and eliminate redundant DB accesses.
+2) updated workcentre performance report to highlight areas where there was no transaction for hte batch as yet
+3) updated shipplancom status report to show comments on various shipping orders in details view
+
+
+Version 3.4
+
+Install
+
+1) Add table Leap_wkCtrPerfComments
+2) add view viewLatestCommentByBatchWkCtr
+
+upgrade
+
+1) Fixed bug with date time conversion from Lims interface again.  Note date formats on TIL-km-01 are different to laptop.
+TIL-km-01 date format is mm/dd/yyyy hh:mi:ss PM  laptop is dd/mm/yyyy hh24:mi:ss
+2) Added report for Test and Ship
+3) Added function to comment on workcentre performance issues
+
+
+Version 3.5
+
+Install
+
+1) on table Leap_transactions create index idxTransTypeBatchID
+2) on table Leap_transactions create index idxTransTypeBatchIdTrim 
+
+upgrade
+
+1) added comments to batch routing view to allow comments at each stage to be visualised for one batch in workcentre performance
+2) udpated PLTcalculator to dump a CSV to the server rather than trying to display it in the gridview , there was too much data for grid view.
+3) udpated SPC upload to change the audit user when an update was carried out to the line via SPC upload 
+    1 = initial upload of line, 2 = user edit of line, 3= line updated due to re-upload of same line from SPC
+4) updated test and ship excel report to include itemcode and any comments from teh QC workcentre
+
+
+Version 3.6
+
+Install
+
+1) add scheduled task to server to start script to run PLT interface on nightly basis
+
+upgrade
+
+1) added new file to allow PLT interface scraper to run on a scheduled task autmatically each night
+2) put date restriction of products which have shipped in the last year on the PLT calculator
+
+Version 3.7
+
+upgrade
+
+1) Added item code to test and ship excel sheet
+2) Added blister line to Workcentre performance grid
+
+
+Version 3.7
+
+Installation
+ 1) update Leap_wkctrperfcomment.  update wkctrperfcomment to nvarchar(2000) add urgent, FIO and InterimApproval as bit; SentDate as date
+
+upgrade
+
+1) Added function to allow daily email to be sent (dailyemail.aspx)
+2) Added function to allow batch view for individual batch (batchview.aspx)
+3) Updated Wkctrperformance report to allow comment with new comment function (workcentreperformance.aspx)
+4) Fixed bug with Null value for highest transaction when editing a lot (spcupload.aspx)
+
+Version 4.0
+
+Installation
+
+1) add column to Leap_wkctrperfcomment. Excluded (Bit)
+2) create view viewExcludedLots
+
+Upgrade
+
+1) added fuction to exclude values from calculation (workcentreperformance.aspx)
+2) removed double click bug on workcentreperformance.aspx
+3) updated functionality around commenting to allow for easier comments (batchview.aspx)
+4) added comment functionality to the (spcupload.aspx) page
+5) Added commenting to SPCSummaryView page (spcsummaryfullView.aspx)
+
+
+Version 4.1
+
+Upgrades
+
+1) Fixed bug with sorting in workcentreperformance.aspx
+2) Extended date of text and ship to 4 months.  testandshipexceldata.aspx
+3) Fixed bug where compression dates were not showing up in testandshipexceldata.aspx
+4) Fixed bug with unique constraint in batchview.aspx and uploadshipplancom.aspx
+
+
+version 4.2
+
+Upgrades
+
+1) Added check in SPCupload to check that the upload control has a file prior to upload, to avoid error with updating with last uploaded file in error.
+2) Updated interfacescraper.aspx file link to point to the clone interface directory in the application folder
+
+
+Version 4.3
+Installation
+
+Install table valued function RawMatsLeadTimePivot into database
+
+1) Added PLTRawMatsReport.aspx 
+
+
+Version 4.4
+
+Install table valued function MultiRawMatsLeadTimePivot into database
+
+1) added PLTMultiRawMatsReport.aspx
+2) Added function to pull in item codes and descriptions from xfp to Leap table to allow clear naming of RM items
+3) added AutoPivot report to report all Plant lead time data 
+
+Version 4.5
+
+1) updated urgent email format to look like daily email format and put emailer into seperate class, removed obsolete code from dailyemail.aspx and messagecontrol.ascx
+
+Version 4.6
+
+1) Added CPK functionality to workcentrePerformance.aspx report
+2) started BWI functionality but not complete at time of import to production environment
+
+Version 4.7
+
+1) updated interface to eliminate item codes for lims for CF and EC
+
+Version 4.8
+
+1) Added function to highlight when actual and order item code are different in shipment and overlabel workcentres workcentreperformance.aspx
+
+Version 4.9
+
+1) Added functionality to show only incomplete batches in the workcentreperformance.aspx
+
+Version 4.10
+
+Install table -  LeaP_10wkPlan
+update - viewTransactionsWithFirstDisp
+add column ProdGroup int to leap_Itemmaster
+install table - Leap_ProdGroup
+
+1) Added MPS upload and reporting
+2) Added BRTS QP and QA to BatchView
+3) 
+
+
+asdfasdf

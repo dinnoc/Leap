@@ -1,0 +1,8 @@
+﻿For AG granules batches the transaction is turning up as compression for AG granules. 
+Can change but adjusting the routing for that item code with same transaction number aas 
+compression but change the description to AG granules mandec.  -1 etc turning up as well.
+
+
+if a interface file is in teh archive folder twice for some reason you will see duplicate transactions for the same work centre
+need to add function to check if hte file you are reading has teh same write time and file name as a previously consumed file.
+

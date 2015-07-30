@@ -1,0 +1,1755 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsBatch" targetNamespace="http://tempuri.org/dsBatch.xsd" xmlns:mstns="http://tempuri.org/dsBatch.xsd" xmlns="http://tempuri.org/dsBatch.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LeaPDevConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="LeaPDevConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LeaPDevConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BatchDetailsTableAdapter" GeneratorDataComponentClassName="BatchDetailsTableAdapter" Name="BatchDetails" UserDataComponentName="BatchDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_spcBatches.spcBatchID, LeaP_spcBatches.BatchNumber, LeaP_spcBatches.spcID, LeaP_spcBatches.Quantity, 
+               LeaP_ShipPlanCom.TILFinalApprovalDate, LeaP_ShipPlanCom.TILShippingMemoDate, LeaP_ShipPlanCom.ItemCode, 
+               LeaP_ShipPlanCom.TPCConfirmedCollectionDate
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="spcBatchID" DataSetColumn="spcBatchID" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="spcID" DataSetColumn="spcID" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="TILFinalApprovalDate" DataSetColumn="TILFinalApprovalDate" />
+              <Mapping SourceColumn="TILShippingMemoDate" DataSetColumn="TILShippingMemoDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PerformanceDataTableAdapter" GeneratorDataComponentClassName="PerformanceDataTableAdapter" Name="PerformanceData" UserDataComponentName="PerformanceDataTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, LeaP_Transactions.TransDate, LeaP_TransactionTypes.Description, 
+               LeaP_WorkCentre.WorkCentreCompleteTransaction, LeaP_Transactions.BatchID
+FROM  LeaP_WorkCentre INNER JOIN
+               LeaP_RouteData ON LeaP_WorkCentre.WorkCentreID = LeaP_RouteData.WorkCentreID LEFT OUTER JOIN
+               LeaP_TransactionTypes ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_TransactionTypes.TransactionTypes RIGHT OUTER JOIN
+               LeaP_spcBatches ON LeaP_RouteData.spcBatchID = LeaP_spcBatches.spcBatchID RIGHT OUTER JOIN
+               LeaP_ShipPlanCom ON LeaP_spcBatches.spcID = LeaP_ShipPlanCom.spcID LEFT OUTER JOIN
+               LeaP_Transactions ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_Transactions.TransType AND 
+               LeaP_spcBatches.BatchNumber = LeaP_Transactions.BatchID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="WorkCentreCompleteTransaction" DataSetColumn="WorkCentreCompleteTransaction" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, LeaP_Transactions.TransDate, LeaP_TransactionTypes.Description, 
+               LeaP_WorkCentre.WorkCentreCompleteTransaction, LeaP_Transactions.BatchID
+FROM  LeaP_WorkCentre INNER JOIN
+               LeaP_RouteData ON LeaP_WorkCentre.WorkCentreID = LeaP_RouteData.WorkCentreID LEFT OUTER JOIN
+               LeaP_TransactionTypes ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_TransactionTypes.TransactionTypes RIGHT OUTER JOIN
+               LeaP_spcBatches ON LeaP_RouteData.spcBatchID = LeaP_spcBatches.spcBatchID RIGHT OUTER JOIN
+               LeaP_ShipPlanCom ON LeaP_spcBatches.spcID = LeaP_ShipPlanCom.spcID LEFT OUTER JOIN
+               LeaP_Transactions ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_Transactions.TransType AND 
+               LeaP_Transactions.BatchID LIKE { fn CONCAT(LeaP_spcBatches.BatchNumber, '%') }
+WHERE (LeaP_spcBatches.spcID = @spcid) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction &lt; 50)
+UNION
+SELECT LeaP_ShipPlanCom_1.TPCOrderNo, LeaP_spcBatches_1.BatchNumber, LeaP_RouteData_1.StartDate, LeaP_RouteData_1.EndDate, 
+               LeaP_WorkCentre_1.WorkCentreDesc, LeaP_Transactions_1.TransDate, LeaP_TransactionTypes_1.Description, 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction, LeaP_Transactions_1.BatchID
+FROM  LeaP_WorkCentre AS LeaP_WorkCentre_1 INNER JOIN
+               LeaP_RouteData AS LeaP_RouteData_1 ON LeaP_WorkCentre_1.WorkCentreID = LeaP_RouteData_1.WorkCentreID LEFT OUTER JOIN
+               LeaP_TransactionTypes AS LeaP_TransactionTypes_1 ON 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction = LeaP_TransactionTypes_1.TransactionTypes RIGHT OUTER JOIN
+               LeaP_spcBatches AS LeaP_spcBatches_1 ON LeaP_RouteData_1.spcBatchID = LeaP_spcBatches_1.spcBatchID RIGHT OUTER JOIN
+               LeaP_ShipPlanCom AS LeaP_ShipPlanCom_1 ON LeaP_spcBatches_1.spcID = LeaP_ShipPlanCom_1.spcID LEFT OUTER JOIN
+               LeaP_Transactions AS LeaP_Transactions_1 ON LeaP_WorkCentre_1.WorkCentreCompleteTransaction = LeaP_Transactions_1.TransType AND 
+               LeaP_Transactions_1.BatchID LIKE { fn CONCAT(LeaP_spcBatches_1.BatchTrimmed, '%') }
+WHERE (LeaP_WorkCentre_1.WorkCentreCompleteTransaction &gt; 50) AND (LeaP_spcBatches_1.spcID = @spcid)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreDesc</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="spcid" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcid" Precision="0" Scale="0" Size="4" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Decommissioned3TableAdapter" GeneratorDataComponentClassName="Decommissioned3TableAdapter" Name="Decommissioned3" UserDataComponentName="Decommissioned3TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom_1.TPCOrderNo, LeaP_spcBatches_1.BatchNumber, LeaP_RouteData_1.StartDate, LeaP_RouteData_1.EndDate, 
+               LeaP_WorkCentre_1.WorkCentreDesc, LeaP_Transactions_1.TransDate, LeaP_TransactionTypes_1.Description, 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction, LeaP_Transactions_1.BatchID
+FROM  LeaP_TransactionTypes AS LeaP_TransactionTypes_1 RIGHT OUTER JOIN
+               LeaP_WorkCentre AS LeaP_WorkCentre_1 INNER JOIN
+               LeaP_RouteData AS LeaP_RouteData_1 ON LeaP_WorkCentre_1.WorkCentreID = LeaP_RouteData_1.WorkCentreID RIGHT OUTER JOIN
+               LeaP_Transactions AS LeaP_Transactions_1 INNER JOIN
+               LeaP_spcBatches AS LeaP_spcBatches_1 ON LeaP_Transactions_1.BatchID = LeaP_spcBatches_1.BatchTrimmed ON 
+               LeaP_WorkCentre_1.WorkCentreCompleteTransaction = LeaP_Transactions_1.TransType AND 
+               LeaP_RouteData_1.spcBatchID = LeaP_spcBatches_1.spcBatchID ON 
+               LeaP_TransactionTypes_1.TransactionTypes = LeaP_WorkCentre_1.WorkCentreCompleteTransaction RIGHT OUTER JOIN
+               LeaP_ShipPlanCom AS LeaP_ShipPlanCom_1 ON LeaP_spcBatches_1.spcID = LeaP_ShipPlanCom_1.spcID
+WHERE (LeaP_WorkCentre_1.WorkCentreCompleteTransaction &gt; 50)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="WorkCentreCompleteTransaction" DataSetColumn="WorkCentreCompleteTransaction" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Decommissioned2TableAdapter" GeneratorDataComponentClassName="Decommissioned2TableAdapter" Name="Decommissioned2" UserDataComponentName="Decommissioned2TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, LeaP_WorkCentre.WorkCentreDesc, 
+               LeaP_WorkCentre.WorkCentreCompleteTransaction, dbo.MaxTransDateByBatchAndTransType(LeaP_spcBatches.BatchNumber, 
+               LeaP_spcBatches.BatchTrimmed, LeaP_WorkCentre.WorkCentreCompleteTransaction) AS TransactionDate, LeaP_spcBatches.Quantity
+FROM  LeaP_RouteData INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID INNER JOIN
+               LeaP_spcBatches ON LeaP_RouteData.spcBatchID = LeaP_spcBatches.spcBatchID
+ORDER BY LeaP_spcBatches.BatchNumber</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="WorkCentreCompleteTransaction" DataSetColumn="WorkCentreCompleteTransaction" />
+              <Mapping SourceColumn="TransactionDate" DataSetColumn="TransactionDate" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Decommissioned1TableAdapter" GeneratorDataComponentClassName="Decommissioned1TableAdapter" Name="Decommissioned1" UserDataComponentName="Decommissioned1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, LeaP_Transactions.TransDate, LeaP_RouteData.WorkCentreID, LeaP_Transactions.BatchID, leap_transactions.Quantity
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               LeaP_Transactions ON LeaP_WorkCentre.WorkCentreCompleteTransaction = LeaP_Transactions.TransType AND 
+               (LeaP_spcBatches.BatchNumber = LeaP_Transactions.BatchIDTrim OR
+               LeaP_spcBatches.BatchTrimmed = LeaP_Transactions.BatchIDTrim)
+WHERE (LeaP_spcBatches.spcID = @spcid)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreDesc</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="spcid" ColumnName="spcID" DataSourceName="LeaPDev.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcid" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="spcID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="WorkCentreID" DataSetColumn="WorkCentreID" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BatchWorkCentreStatusTableAdapter" GeneratorDataComponentClassName="BatchWorkCentreStatusTableAdapter" Name="BatchWorkCentreStatus" UserDataComponentName="BatchWorkCentreStatusTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ShipPlanCom.TPCOrderQuantity, LeaP_ShipPlanCom.TPCConfirmedCollectionDate, 
+               LeaP_ShipPlanCom.ItemCode, BatchCurrentStatus.BatchNumber, BatchCurrentStatus.WorkCentreDesc, BatchCurrentStatus.EndDate, 
+               BatchCurrentStatus.TransDate, BatchCurrentStatus.nextWorkCentre, BatchCurrentStatus.nextEndDate, LeaP_ShipPlanCom.spcID, 
+               LeaP_ItemMaster.ItemDescription, BatchCurrentStatus.BatchID, Leap_XFP_Lots.qualityStatus AS status, 
+               viewIntermediateStatus.BatchID AS IntermediateStatus
+FROM  Leap_XFP_Lots INNER JOIN
+               BatchCurrentStatus ON Leap_XFP_Lots.BatchID = BatchCurrentStatus.BatchID LEFT OUTER JOIN
+               viewIntermediateStatus ON BatchCurrentStatus.BatchTrimmed = viewIntermediateStatus.batchtrim RIGHT OUTER JOIN
+               LeaP_ShipPlanCom LEFT OUTER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode ON BatchCurrentStatus.spcID = LeaP_ShipPlanCom.spcID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="TPCOrderQuantity" DataSetColumn="TPCOrderQuantity" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="nextWorkCentre" DataSetColumn="nextWorkCentre" />
+              <Mapping SourceColumn="nextEndDate" DataSetColumn="nextEndDate" />
+              <Mapping SourceColumn="spcID" DataSetColumn="spcID" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="status" DataSetColumn="status" />
+              <Mapping SourceColumn="IntermediateStatus" DataSetColumn="IntermediateStatus" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataAllBatches" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataAllBatches" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataAllBatches" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ShipPlanCom.TPCOrderQuantity, LeaP_ShipPlanCom.TPCConfirmedCollectionDate, 
+               LeaP_ShipPlanCom.ItemCode, LeaP_spcBatches.BatchNumber, BatchCurrentStatus.WorkCentreDesc, BatchCurrentStatus.EndDate, 
+               BatchCurrentStatus.TransDate, BatchCurrentStatus.nextWorkCentre, BatchCurrentStatus.nextEndDate, LeaP_ShipPlanCom.spcID, 
+               LeaP_ItemMaster.ItemDescription, BatchCurrentStatus.BatchID, Leap_XFP_Lots.qualityStatus AS status, 
+               viewIntermediateStatus.BatchID AS IntermediateStatus
+FROM  LeaP_ShipPlanCom LEFT OUTER JOIN
+               Leap_XFP_Lots INNER JOIN
+               BatchCurrentStatus ON Leap_XFP_Lots.BatchID = BatchCurrentStatus.BatchID RIGHT OUTER JOIN
+               viewIntermediateStatus RIGHT OUTER JOIN
+               LeaP_spcBatches ON viewIntermediateStatus.batchtrim = LeaP_spcBatches.BatchTrimmed ON 
+               BatchCurrentStatus.spcBatchID = LeaP_spcBatches.spcBatchID ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID LEFT OUTER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode
+ORDER BY LeaP_ShipPlanCom.TPCConfirmedCollectionDate</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BatchRouteActualDetailsTableAdapter" GeneratorDataComponentClassName="BatchRouteActualDetailsTableAdapter" Name="BatchRouteActualDetails" UserDataComponentName="BatchRouteActualDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.WorkCentreID, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewLatestCommentByBatchWkCtr.CommDate, 
+               viewLatestCommentByBatchWkCtr.WkCtrPerfComment
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_spcBatches.spcID = @spcID) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction &gt;= 0)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreCompleteTransaction</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="spcID" ColumnName="spcID" DataSourceName="LeapProd.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="spcID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="WorkCentreID" DataSetColumn="WorkCentreID" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="CommDate" DataSetColumn="CommDate" />
+              <Mapping SourceColumn="WkCtrPerfComment" DataSetColumn="WkCtrPerfComment" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.WorkCentreID, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewLatestCommentByBatchWkCtr.WkCtrPerfComment, 
+               viewLatestCommentByBatchWkCtr.CommDate
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid AND 
+               LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_spcBatches.spcBatchID = @spcbatchID) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction &gt;= 0)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreCompleteTransaction</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="spcbatchID" ColumnName="spcBatchID" DataSourceName="LeapProd.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcbatchID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="spcBatchID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DecommissionedTableAdapter" GeneratorDataComponentClassName="DecommissionedTableAdapter" Name="Decommissioned" UserDataComponentName="DecommissionedTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ShipPlanCom.TPCOrderQuantity, LeaP_ShipPlanCom.TPCConfirmedCollectionDate, 
+               LeaP_ShipPlanCom.ItemCode, LeaP_ShipPlanCom.spcID, LeaP_ItemMaster.ItemDescription, Leap_XFP_Lots.qualityStatus AS status, 
+               viewIntermediateStatus.BatchID AS IntermediateStatus, viewBatchCurrentStatusPackBulk.WorkCentreDesc, 
+               viewBatchCurrentStatusPackBulk.EndDate, viewBatchCurrentStatusPackBulk.nextWorkCentre, viewBatchCurrentStatusPackBulk.nextEndDate, 
+               viewBatchCurrentStatusPackBulk.BatchNumber
+FROM  LeaP_ItemMaster RIGHT OUTER JOIN
+               viewBatchCurrentStatusPackBulk LEFT OUTER JOIN
+               Leap_XFP_Lots ON viewBatchCurrentStatusPackBulk.BatchNumber = Leap_XFP_Lots.BatchIDTrimmed RIGHT OUTER JOIN
+               LeaP_ShipPlanCom ON viewBatchCurrentStatusPackBulk.spcID = LeaP_ShipPlanCom.spcID LEFT OUTER JOIN
+               viewIntermediateStatus ON viewBatchCurrentStatusPackBulk.BatchTrimmed = viewIntermediateStatus.batchtrim ON 
+               LeaP_ItemMaster.ItemCode = LeaP_ShipPlanCom.ItemCode
+WHERE (viewBatchCurrentStatusPackBulk.HighestTransType &lt; @highestTranstype)
+ORDER BY LeaP_ShipPlanCom.TPCConfirmedCollectionDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="highestTranstype" ColumnName="HighestTransType" DataSourceName="LeaPDev.dbo.viewBatchCurrentStatusPackBulk" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@highestTranstype" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="HighestTransType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="TPCOrderQuantity" DataSetColumn="TPCOrderQuantity" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="spcID" DataSetColumn="spcID" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="status" DataSetColumn="status" />
+              <Mapping SourceColumn="IntermediateStatus" DataSetColumn="IntermediateStatus" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="nextWorkCentre" DataSetColumn="nextWorkCentre" />
+              <Mapping SourceColumn="nextEndDate" DataSetColumn="nextEndDate" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WorkCentrePerformanceTableAdapter" GeneratorDataComponentClassName="WorkCentrePerformanceTableAdapter" Name="WorkCentrePerformance" UserDataComponentName="WorkCentrePerformanceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ItemMaster.ItemCode AS SPCItem, LeaP_ItemMaster.ItemDescription, LeaP_spcBatches.BatchNumber, 
+               LeaP_ShipPlanCom.TILShippingMemoDate, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, viewTransactionsWithFirstDisp.TransDate, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewTransactionsWithFirstDisp.ItemCode, DATEDIFF(d, 
+               viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.EndDate) AS ActualMinusTarget, DATEDIFF(d, LeaP_RouteData.EndDate, 
+               LeaP_ShipPlanCom.TILShippingMemoDate) AS ShipMinusTarget, LeaP_spcBatches.spcBatchID, LeaP_RouteData.RouteDataID, 
+               viewLatestCommentByBatchWkCtr.WkCtrPerfComment, viewLatestCommentByBatchWkCtr.CommDate, LeaP_ItemMaster.BlisterLine, 
+               LeaP_WorkCentre.WorkCentreID, viewExcludedLots.ExclCounter,  DATEDIFF(d,LeaP_RouteData.StartDate, LeaP_RouteData.EndDate) as RouteDuration
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewExcludedLots ON LeaP_WorkCentre.WorkCentreID = viewExcludedLots.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewExcludedLots.Batchid LEFT OUTER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_WorkCentre.WorkCentreID = @workcentreID) AND (LeaP_RouteData.EndDate &gt;= @startdate) AND (LeaP_RouteData.EndDate &lt;= @enddate)
+ORDER BY LeaP_RouteData.EndDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="workcentreID" ColumnName="WorkCentreID" DataSourceName="LeapProd.dbo.LeaP_WorkCentre" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@workcentreID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WorkCentreID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="EndDate" DataSourceName="LeapProd.dbo.LeaP_RouteData" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="EndDate" DataSourceName="LeapProd.dbo.LeaP_RouteData" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="TILShippingMemoDate" DataSetColumn="TILShippingMemoDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="ActualMinusTarget" DataSetColumn="ActualMinusTarget" />
+              <Mapping SourceColumn="ShipMinusTarget" DataSetColumn="ShipMinusTarget" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="SPCItem" DataSetColumn="SPCItem" />
+              <Mapping SourceColumn="spcBatchID" DataSetColumn="spcBatchID" />
+              <Mapping SourceColumn="RouteDataID" DataSetColumn="RouteDataID" />
+              <Mapping SourceColumn="WkCtrPerfComment" DataSetColumn="WkCtrPerfComment" />
+              <Mapping SourceColumn="CommDate" DataSetColumn="CommDate" />
+              <Mapping SourceColumn="BlisterLine" DataSetColumn="BlisterLine" />
+              <Mapping SourceColumn="WorkCentreID" DataSetColumn="WorkCentreID" />
+              <Mapping SourceColumn="ExclCounter" DataSetColumn="ExclCounter" />
+              <Mapping SourceColumn="RouteDuration" DataSetColumn="RouteDuration" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ItemMaster.ItemCode AS SPCItem, LeaP_ItemMaster.ItemDescription, LeaP_spcBatches.BatchNumber, 
+               LeaP_ShipPlanCom.TILShippingMemoDate, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, viewTransactionsWithFirstDisp.TransDate, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewTransactionsWithFirstDisp.ItemCode, DATEDIFF(d, 
+               viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.EndDate) AS ActualMinusTarget, DATEDIFF(d, LeaP_RouteData.EndDate, 
+               LeaP_ShipPlanCom.TILShippingMemoDate) AS ShipMinusTarget, LeaP_spcBatches.spcBatchID, LeaP_RouteData.RouteDataID, 
+               viewLatestCommentByBatchWkCtr.WkCtrPerfComment, viewLatestCommentByBatchWkCtr.CommDate, LeaP_ItemMaster.BlisterLine, 
+               LeaP_WorkCentre.WorkCentreID, viewExcludedLots.ExclCounter, DATEDIFF(d, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate) 
+               AS RouteDuration
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewExcludedLots ON LeaP_WorkCentre.WorkCentreID = viewExcludedLots.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewExcludedLots.Batchid LEFT OUTER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_WorkCentre.WorkCentreID = @workcentreID) AND (LeaP_RouteData.EndDate &gt; @startdate) AND (LeaP_RouteData.EndDate &lt; @enddate) 
+               AND (LeaP_spcBatches.HighestTransType &lt; @transType)
+ORDER BY LeaP_RouteData.EndDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="workcentreID" ColumnName="WorkCentreID" DataSourceName="LEAPPROD120127.dbo.LeaP_WorkCentre" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@workcentreID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WorkCentreID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="EndDate" DataSourceName="LEAPPROD120127.dbo.LeaP_RouteData" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="EndDate" DataSourceName="LEAPPROD120127.dbo.LeaP_RouteData" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="transType" ColumnName="HighestTransType" DataSourceName="LEAPPROD120127.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@transType" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="HighestTransType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SPCFullViewTableAdapter" GeneratorDataComponentClassName="SPCFullViewTableAdapter" Name="SPCFullView" UserDataComponentName="SPCFullViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ShipPlanCom.ItemCode, LeaP_ItemMaster.ItemDescription, LeaP_spcBatches.BatchNumber, 
+               LeaP_WorkCentre.WorkCentreDesc AS LastWkCtrDesc, LeaP_RouteData_1.EndDate AS LastWkCtrTargetEndDate, 
+               LeaP_spcBatches.HighestTransTypeDate AS LastWkCtrActual, LeaP_WorkCentre_1.WorkCentreDesc AS NextWkCtrDesc, 
+               LeaP_RouteData.EndDate AS NextWkCtrTargetEndDate, viewIntermediateStatus.BatchID, Leap_XFP_Lots.qualityStatus, 
+               LeaP_ShipPlanCom.TILFinalApprovalDate, LeaP_ShipPlanCom.TPCConfirmedCollectionDate, LeaP_spcBatches.HighestTransType, 
+               LeaP_ShipPlanCom.spcID
+FROM  LeaP_spcBatches LEFT OUTER JOIN
+               Leap_XFP_Lots ON LeaP_spcBatches.BatchNumber = Leap_XFP_Lots.BatchIDTrimmed LEFT OUTER JOIN
+               viewIntermediateStatus ON LeaP_spcBatches.BatchTrimmed = viewIntermediateStatus.batchtrim LEFT OUTER JOIN
+               LeaP_WorkCentre AS LeaP_WorkCentre_1 INNER JOIN
+               LeaP_RouteData INNER JOIN
+               LeaP_RouteData AS LeaP_RouteData_1 ON LeaP_RouteData.spcBatchID = LeaP_RouteData_1.spcBatchID AND 
+               LeaP_RouteData.WorkCentreID = LeaP_RouteData_1.nextWorkCentre ON 
+               LeaP_WorkCentre_1.WorkCentreID = LeaP_RouteData.WorkCentreID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData_1.WorkCentreID = LeaP_WorkCentre.WorkCentreID ON 
+               LeaP_spcBatches.spcBatchID = LeaP_RouteData_1.spcBatchID AND 
+               LeaP_spcBatches.HighestTransType = LeaP_RouteData_1.wkCentreCompleteTrans FULL OUTER JOIN
+               LeaP_ShipPlanCom INNER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode ON LeaP_spcBatches.spcID = LeaP_ShipPlanCom.spcID
+WHERE (LeaP_spcBatches.HighestTransType &lt; @HighestTransID)
+ORDER BY LeaP_ShipPlanCom.TPCConfirmedCollectionDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="HighestTransID" ColumnName="HighestTransType" DataSourceName="LeapDev2.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@HighestTransID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="HighestTransType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="LastWkCtrDesc" DataSetColumn="LastWkCtrDesc" />
+              <Mapping SourceColumn="LastWkCtrTargetEndDate" DataSetColumn="LastWkCtrTargetEndDate" />
+              <Mapping SourceColumn="LastWkCtrActual" DataSetColumn="LastWkCtrActual" />
+              <Mapping SourceColumn="NextWkCtrDesc" DataSetColumn="NextWkCtrDesc" />
+              <Mapping SourceColumn="NextWkCtrTargetEndDate" DataSetColumn="NextWkCtrTargetEndDate" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="qualityStatus" DataSetColumn="qualityStatus" />
+              <Mapping SourceColumn="TILFinalApprovalDate" DataSetColumn="TILFinalApprovalDate" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+              <Mapping SourceColumn="HighestTransType" DataSetColumn="HighestTransType" />
+              <Mapping SourceColumn="spcID" DataSetColumn="spcID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Decommissioned4TableAdapter" GeneratorDataComponentClassName="Decommissioned4TableAdapter" Name="Decommissioned4" UserDataComponentName="Decommissioned4TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_ItemMaster.ItemCode AS SPCItem, LeaP_ItemMaster.ItemDescription, LeaP_spcBatches.BatchNumber, 
+               LeaP_ShipPlanCom.TILShippingMemoDate, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, viewTransactionsWithFirstDisp.TransDate, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewTransactionsWithFirstDisp.ItemCode, DATEDIFF(d, 
+               viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.EndDate) AS ActualMinusTarget, DATEDIFF(d, LeaP_RouteData.EndDate, 
+               LeaP_ShipPlanCom.TILShippingMemoDate) AS ShipMinusTarget, LeaP_spcBatches.spcBatchID, LeaP_RouteData.RouteDataID
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID INNER JOIN
+               LeaP_ItemMaster ON LeaP_ShipPlanCom.ItemCode = LeaP_ItemMaster.ItemCode LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_WorkCentre.WorkCentreID = @workcentreID) AND (LeaP_RouteData.EndDate &gt; @startdate) AND (LeaP_RouteData.EndDate &lt; @enddate)
+ORDER BY LeaP_RouteData.EndDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="workcentreID" ColumnName="WorkCentreID" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@workcentreID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WorkCentreID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="EndDate" DataSourceName="" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="EndDate" DataSourceName="" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="EndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="TILShippingMemoDate" DataSetColumn="TILShippingMemoDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="ActualMinusTarget" DataSetColumn="ActualMinusTarget" />
+              <Mapping SourceColumn="ShipMinusTarget" DataSetColumn="ShipMinusTarget" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="SPCItem" DataSetColumn="SPCItem" />
+              <Mapping SourceColumn="spcBatchID" DataSetColumn="spcBatchID" />
+              <Mapping SourceColumn="RouteDataID" DataSetColumn="RouteDataID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TestAndShipExcelTableAdapter" GeneratorDataComponentClassName="TestAndShipExcelTableAdapter" Name="TestAndShipExcel" UserDataComponentName="TestAndShipExcelTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT b.BatchNumber, b.BatchTrimmed, c.TPCOrderNo, d.FirstMandecDate, a.EndDate AS FinalQCTestDate, 
+               c.TILFinalApprovalDate AS FinalApprovalDate, c.TPCConfirmedCollectionDate, c.AuditComment, e.FirstLimsApprovalDate, a.spcBatchID, 
+               a.StartDate AS QCTestStartDate, c.ItemCode, f.WkCtrPerfComment AS QC_Comment, f.CommDate AS Comment_date, g.wkctrperfcomment as BatchReviewComment, g.commdate as batchReviewComm_date
+FROM  (SELECT spcBatchID, EndDate, StartDate
+               FROM   LeaP_RouteData
+               WHERE (wkCentreCompleteTrans = 65) AND (EndDate &gt;@startdate) AND (EndDate &lt; @enddate)) AS a INNER JOIN
+               LeaP_spcBatches AS b ON a.spcBatchID = b.spcBatchID INNER JOIN
+               LeaP_ShipPlanCom AS c ON b.spcID = c.spcID LEFT OUTER JOIN
+                   (SELECT MIN(TransDate) AS FirstMandecDate, MAX(TransDate) AS LastMandecDate, BatchIDTrim
+                    FROM   LeaP_Transactions
+                    WHERE (TransType = 40)
+                    GROUP BY BatchIDTrim) AS d ON b.BatchTrimmed = d.BatchIDTrim LEFT OUTER JOIN
+                   (SELECT MIN(TransDate) AS FirstLimsApprovalDate, MAX(TransDate) AS LastMandecDate, BatchIDTrim
+                    FROM   LeaP_Transactions AS LeaP_Transactions_1
+                    WHERE (TransType = 65)
+                    GROUP BY BatchIDTrim) AS e ON b.BatchTrimmed = e.BatchIDTrim LEFT OUTER JOIN
+                   (SELECT WkCtrPerfComment, Batchid, CommDate
+                    FROM   viewLatestCommentByBatchWkCtr
+                    WHERE (WkCtrID = 9)) AS f ON b.BatchNumber = f.Batchid LEFT OUTER JOIN
+                   (SELECT WkCtrPerfComment, Batchid, CommDate
+                    FROM   viewLatestCommentByBatchWkCtr
+                    WHERE (WkCtrID = 2)) AS g ON b.BatchNumber = g.Batchid</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="BatchTrimmed" DataSetColumn="BatchTrimmed" />
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="FirstMandecDate" DataSetColumn="FirstMandecDate" />
+              <Mapping SourceColumn="FinalQCTestDate" DataSetColumn="FinalQCTestDate" />
+              <Mapping SourceColumn="FinalApprovalDate" DataSetColumn="FinalApprovalDate" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+              <Mapping SourceColumn="AuditComment" DataSetColumn="AuditComment" />
+              <Mapping SourceColumn="FirstLimsApprovalDate" DataSetColumn="FirstLimsApprovalDate" />
+              <Mapping SourceColumn="spcBatchID" DataSetColumn="spcBatchID" />
+              <Mapping SourceColumn="QCTestStartDate" DataSetColumn="QCTestStartDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="QC_Comment" DataSetColumn="QC_Comment" />
+              <Mapping SourceColumn="Comment_date" DataSetColumn="Comment_date" />
+              <Mapping SourceColumn="BatchReviewComment" DataSetColumn="BatchReviewComment" />
+              <Mapping SourceColumn="batchReviewComm_date" DataSetColumn="batchReviewComm_date" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BatchRouteDetailsWithCommentsTableAdapter" GeneratorDataComponentClassName="BatchRouteDetailsWithCommentsTableAdapter" Name="BatchRouteDetailsWithComments" UserDataComponentName="BatchRouteDetailsWithCommentsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.WorkCentreID, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewLatestCommentByBatchWkCtr.WkCtrPerfComment, 
+               viewLatestCommentByBatchWkCtr.CommDate
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid AND 
+               LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_spcBatches.spcBatchID = @spcbatchID) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction &gt;= 0)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreCompleteTransaction</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="spcbatchID" ColumnName="spcBatchID" DataSourceName="LeapProd.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcbatchID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="spcBatchID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="WorkCentreDesc" DataSetColumn="WorkCentreDesc" />
+              <Mapping SourceColumn="TransDate" DataSetColumn="TransDate" />
+              <Mapping SourceColumn="WorkCentreID" DataSetColumn="WorkCentreID" />
+              <Mapping SourceColumn="BatchID" DataSetColumn="BatchID" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="WkCtrPerfComment" DataSetColumn="WkCtrPerfComment" />
+              <Mapping SourceColumn="CommDate" DataSetColumn="CommDate" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_RouteData.StartDate, LeaP_RouteData.EndDate, 
+               LeaP_WorkCentre.WorkCentreDesc, viewTransactionsWithFirstDisp.TransDate, LeaP_RouteData.WorkCentreID, 
+               viewTransactionsWithFirstDisp.BatchID, viewTransactionsWithFirstDisp.Quantity, viewLatestCommentByBatchWkCtr.CommDate, 
+               viewLatestCommentByBatchWkCtr.WkCtrPerfComment
+FROM  LeaP_ShipPlanCom INNER JOIN
+               LeaP_spcBatches ON LeaP_ShipPlanCom.spcID = LeaP_spcBatches.spcID INNER JOIN
+               LeaP_RouteData ON LeaP_spcBatches.spcBatchID = LeaP_RouteData.spcBatchID INNER JOIN
+               LeaP_WorkCentre ON LeaP_RouteData.WorkCentreID = LeaP_WorkCentre.WorkCentreID LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr ON LeaP_WorkCentre.WorkCentreID = viewLatestCommentByBatchWkCtr.WkCtrID AND 
+               LeaP_spcBatches.BatchNumber = viewLatestCommentByBatchWkCtr.Batchid LEFT OUTER JOIN
+               viewTransactionsWithFirstDisp ON LeaP_WorkCentre.WorkCentreCompleteTransaction = viewTransactionsWithFirstDisp.TransType AND 
+               (LeaP_spcBatches.BatchNumber = viewTransactionsWithFirstDisp.batchidtrim OR
+               LeaP_spcBatches.BatchTrimmed = viewTransactionsWithFirstDisp.batchidtrim)
+WHERE (LeaP_spcBatches.spcID = @spcID) AND (LeaP_WorkCentre.WorkCentreCompleteTransaction &gt;= 0)
+ORDER BY LeaP_ShipPlanCom.TPCOrderNo, LeaP_spcBatches.BatchNumber, LeaP_WorkCentre.WorkCentreCompleteTransaction</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="spcID" ColumnName="spcID" DataSourceName="LeapProd.dbo.LeaP_spcBatches" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@spcID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="spcID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MPSPerformanceTableAdapter" GeneratorDataComponentClassName="MPSPerformanceTableAdapter" Name="MPSPerformance" UserDataComponentName="MPSPerformanceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>Select a.subwkctr,a.bulkitem,a.lotnumber,a.mpsdate as MPSTarget, b.batchnumber, b.quantity, 
+c.enddate as SPCTarget, c.wkCentreCompleteTrans , d.transdate as LeapActual, d.batchid, e.wkctrperfcomment
+from leap_10wkplan a 
+left outer  join LeaP_spcBatches b on a.lotnumber = b.batchTrimmed
+left outer join leap_routedata c on b.spcbatchid = c.spcbatchid and c.workcentreid = a.wkctr left outer join
+ viewTransactionsWithFirstDisp d ON c.WkCentreCompleteTrans = d.TransType AND 
+               (b.BatchNumber = d.batchidtrim OR
+               b.BatchTrimmed =d.batchidtrim)
+               LEFT OUTER JOIN
+               viewLatestCommentByBatchWkCtr e ON a.wkctr = e.WkCtrID AND 
+               b.BatchNumber = e.Batchid
+where a.mpsdate &gt;@startdate and a.mpsdate &lt; @enddate and a.wkctr = @wkctr
+order by a.mpsdate asc</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="MPSDate" DataSourceName="LeapProd.dbo.LeaP_10wkPlan" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="MPSTarget" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="MPSDate" DataSourceName="LeapProd.dbo.LeaP_10wkPlan" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="MPSTarget" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="wkctr" ColumnName="WkCtr" DataSourceName="LeapProd.dbo.LeaP_10wkPlan" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@wkctr" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WkCtr" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="subwkctr" DataSetColumn="subwkctr" />
+              <Mapping SourceColumn="bulkitem" DataSetColumn="bulkitem" />
+              <Mapping SourceColumn="lotnumber" DataSetColumn="lotnumber" />
+              <Mapping SourceColumn="MPSTarget" DataSetColumn="MPSTarget" />
+              <Mapping SourceColumn="batchnumber" DataSetColumn="batchnumber" />
+              <Mapping SourceColumn="quantity" DataSetColumn="quantity" />
+              <Mapping SourceColumn="SPCTarget" DataSetColumn="SPCTarget" />
+              <Mapping SourceColumn="wkCentreCompleteTrans" DataSetColumn="wkCentreCompleteTrans" />
+              <Mapping SourceColumn="LeapActual" DataSetColumn="LeapActual" />
+              <Mapping SourceColumn="batchid" DataSetColumn="batchid" />
+              <Mapping SourceColumn="wkctrperfcomment" DataSetColumn="wkctrperfcomment" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ShippingReportTableAdapter" GeneratorDataComponentClassName="ShippingReportTableAdapter" Name="ShippingReport" UserDataComponentName="ShippingReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        a.TPCOrderNo, a.TILShippingMemoDate,a.TPCConfirmedCollectionDate, a.ItemCode, a.TPCOrderQuantity, b.ItemDescription, c.Description, d.BatchNumber, e.Quantity AS MandecQty, 
+                         f.Quantity AS ShipQty, f.TransDate AS shipDate, g.WkCtrPerfComment AS BatchReviewComment, h.WkCtrPerfComment AS ShipmentComment, COUNT(j.Batchid) 
+                         AS SMSentCount, COUNT(k.Batchid) AS COASentCount,count(l.batchid) as InvoiceSentCount, MAX(j.CommDate) AS SMSentDate, MAX(k.CommDate) AS COASentDate, max(l.commDate) as InvoiceSentDate
+FROM            LeaP_ShipPlanCom AS a LEFT OUTER JOIN
+                         LeaP_ItemMaster AS b ON a.ItemCode = b.ItemCode LEFT OUTER JOIN
+                         LeaP_ProdGroup AS c ON b.ProdGroup = c.ProdGroupId LEFT OUTER JOIN
+                         LeaP_spcBatches AS d ON a.spcID = d.spcID LEFT OUTER JOIN
+                         LeaP_Transactions AS e ON d.BatchNumber = e.BatchIDTrim AND e.TransType = 60 LEFT OUTER JOIN
+                         LeaP_Transactions AS f ON d.BatchNumber = f.BatchIDTrim AND f.TransType = 80 LEFT OUTER JOIN
+                         viewLatestCommentByBatchWkCtr AS g ON g.Batchid = d.BatchNumber AND g.WkCtrID = 2 LEFT OUTER JOIN
+                         viewLatestCommentByBatchWkCtr AS h ON h.Batchid = d.BatchNumber AND h.WkCtrID = 5 LEFT OUTER JOIN
+                         LeaP_wkCtrPerfComment AS j ON d.BatchNumber = j.Batchid AND j.WkCtrID = 101 LEFT OUTER JOIN
+                         LeaP_wkCtrPerfComment AS k ON d.BatchNumber = k.Batchid AND k.WkCtrID = 102 LEFT OUTER JOIN
+                         LeaP_wkCtrPerfComment AS l ON d.BatchNumber = l.Batchid AND l.WkCtrID = 103
+WHERE        (a.TILShippingMemoDate &gt;= @startdate) AND (a.TILShippingMemoDate &lt;= @enddate)
+GROUP BY a.TPCOrderNo, a.TILShippingMemoDate,a.TPCConfirmedCollectionDate, a.ItemCode, a.TPCOrderQuantity, b.ItemDescription, c.Description, d.BatchNumber, e.Quantity, f.Quantity, f.TransDate, 
+                         g.WkCtrPerfComment, h.WkCtrPerfComment
+ORDER BY a.TPCOrderNo DESC, a.TILShippingMemoDate DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="startdate" ColumnName="TILShippingMemoDate" DataSourceName="LeapProd.dbo.LeaP_ShipPlanCom" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@startdate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="TILShippingMemoDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="enddate" ColumnName="TILShippingMemoDate" DataSourceName="LeapProd.dbo.LeaP_ShipPlanCom" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@enddate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="TILShippingMemoDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="MandecQty" DataSetColumn="MandecQty" />
+              <Mapping SourceColumn="ShipQty" DataSetColumn="ShipQty" />
+              <Mapping SourceColumn="shipDate" DataSetColumn="shipDate" />
+              <Mapping SourceColumn="BatchReviewComment" DataSetColumn="BatchReviewComment" />
+              <Mapping SourceColumn="ShipmentComment" DataSetColumn="ShipmentComment" />
+              <Mapping SourceColumn="SMSentCount" DataSetColumn="SMSentCount" />
+              <Mapping SourceColumn="COASentCount" DataSetColumn="COASentCount" />
+              <Mapping SourceColumn="TPCOrderNo" DataSetColumn="TPCOrderNo" />
+              <Mapping SourceColumn="TILShippingMemoDate" DataSetColumn="TILShippingMemoDate" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="TPCOrderQuantity" DataSetColumn="TPCOrderQuantity" />
+              <Mapping SourceColumn="ItemDescription" DataSetColumn="ItemDescription" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="BatchNumber" DataSetColumn="BatchNumber" />
+              <Mapping SourceColumn="SMSentDate" DataSetColumn="SMSentDate" />
+              <Mapping SourceColumn="COASentDate" DataSetColumn="COASentDate" />
+              <Mapping SourceColumn="InvoiceSentCount" DataSetColumn="InvoiceSentCount" />
+              <Mapping SourceColumn="InvoiceSentDate" DataSetColumn="InvoiceSentDate" />
+              <Mapping SourceColumn="TPCConfirmedCollectionDate" DataSetColumn="TPCConfirmedCollectionDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MPSExcelReportTableAdapter" GeneratorDataComponentClassName="MPSExcelReportTableAdapter" Name="MPSExcelReport" UserDataComponentName="MPSExcelReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select b.workcentredesc,a.subwkctr,a.bulkitem, a.lotnumber,a.mpsdate as MPSDate, 
+a.uploaddate as MPSUpload_date, c.batchid as intermediate_status, d.transdate as mandec_date, datediff(d,d.transdate, a.mpsdate) as MPSminusMANDEC
+from 
+LeaP_10wkPlan a inner join leap_workcentre b on a.wkctr = b.workcentreid
+LEFT OUTER JOIN viewIntermediateStatus c on a.lotnumber = c.batchtrim
+left outer join leap_transactions d on a.lotnumber = d.batchidtrim and transtype = 40
+order by a.lotnumber</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="workcentredesc" DataSetColumn="workcentredesc" />
+              <Mapping SourceColumn="subwkctr" DataSetColumn="subwkctr" />
+              <Mapping SourceColumn="bulkitem" DataSetColumn="bulkitem" />
+              <Mapping SourceColumn="lotnumber" DataSetColumn="lotnumber" />
+              <Mapping SourceColumn="MPSDate" DataSetColumn="MPSDate" />
+              <Mapping SourceColumn="MPSUpload_date" DataSetColumn="MPSUpload_date" />
+              <Mapping SourceColumn="intermediate_status" DataSetColumn="intermediate_status" />
+              <Mapping SourceColumn="mandec_date" DataSetColumn="mandec_date" />
+              <Mapping SourceColumn="MPSminusMANDEC" DataSetColumn="MPSminusMANDEC" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ExceptionReportTableAdapter" GeneratorDataComponentClassName="ExceptionReportTableAdapter" Name="ExceptionReport" UserDataComponentName="ExceptionReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="LeaPDevConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select a.WkCtrPerfComment, a.Batchid, a.WkCtrID, a.CommUser ,a.CommDate as commentdate,c.workcentredesc, max(transdate) as transactiondate
+from leap_wkctrperfcomment a inner join 
+(select MAX(commdate) as max_commdate,Batchid, wkctrid from LeaP_wkCtrPerfComment where Excluded = 1 
+group by Batchid, wkctrid) b 
+on a.Batchid = b.Batchid and a.WkCtrID = b.WkCtrID and a.CommDate = b.max_commdate
+inner join LeaP_WorkCentre c on a.wkctrid = c.WorkCentreID
+left outer join LeaP_transactions d on c.WorkCentreCompleteTransaction = d.transtype and a.batchid = d.batchidtrim where a.commdate &gt; '01-01-2013'
+group by  a.WkCtrPerfComment, a.Batchid, a.WkCtrID, a.CommUser ,a.CommDate,c.workcentredesc
+order by a.Batchid, a.WkCtrID
+
+
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="WkCtrPerfComment" DataSetColumn="WkCtrPerfComment" />
+              <Mapping SourceColumn="Batchid" DataSetColumn="Batchid" />
+              <Mapping SourceColumn="WkCtrID" DataSetColumn="WkCtrID" />
+              <Mapping SourceColumn="CommUser" DataSetColumn="CommUser" />
+              <Mapping SourceColumn="commentdate" DataSetColumn="commentdate" />
+              <Mapping SourceColumn="workcentredesc" DataSetColumn="workcentredesc" />
+              <Mapping SourceColumn="transactiondate" DataSetColumn="transactiondate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsBatch" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsBatch" msprop:Generator_UserDSName="dsBatch">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BatchDetails" msprop:Generator_UserTableName="BatchDetails" msprop:Generator_RowEvArgName="BatchDetailsRowChangeEvent" msprop:Generator_TableVarName="tableBatchDetails" msprop:Generator_TablePropName="BatchDetails" msprop:Generator_RowDeletingName="BatchDetailsRowDeleting" msprop:Generator_RowChangingName="BatchDetailsRowChanging" msprop:Generator_RowDeletedName="BatchDetailsRowDeleted" msprop:Generator_TableClassName="BatchDetailsDataTable" msprop:Generator_RowChangedName="BatchDetailsRowChanged" msprop:Generator_RowEvHandlerName="BatchDetailsRowChangeEventHandler" msprop:Generator_RowClassName="BatchDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="spcBatchID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcBatchID" msprop:Generator_ColumnPropNameInRow="spcBatchID" msprop:Generator_ColumnPropNameInTable="spcBatchIDColumn" msprop:Generator_UserColumnName="spcBatchID" type="xs:int" />
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="spcID" msprop:Generator_ColumnVarNameInTable="columnspcID" msprop:Generator_ColumnPropNameInRow="spcID" msprop:Generator_ColumnPropNameInTable="spcIDColumn" msprop:Generator_UserColumnName="spcID" type="xs:int" minOccurs="0" />
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TILFinalApprovalDate" msprop:Generator_ColumnVarNameInTable="columnTILFinalApprovalDate" msprop:Generator_ColumnPropNameInRow="TILFinalApprovalDate" msprop:Generator_ColumnPropNameInTable="TILFinalApprovalDateColumn" msprop:Generator_UserColumnName="TILFinalApprovalDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TILShippingMemoDate" msprop:Generator_ColumnVarNameInTable="columnTILShippingMemoDate" msprop:Generator_ColumnPropNameInRow="TILShippingMemoDate" msprop:Generator_ColumnPropNameInTable="TILShippingMemoDateColumn" msprop:Generator_UserColumnName="TILShippingMemoDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PerformanceData" msprop:Generator_UserTableName="PerformanceData" msprop:Generator_RowEvArgName="PerformanceDataRowChangeEvent" msprop:Generator_TableVarName="tablePerformanceData" msprop:Generator_TablePropName="PerformanceData" msprop:Generator_RowDeletingName="PerformanceDataRowDeleting" msprop:Generator_RowChangingName="PerformanceDataRowChanging" msprop:Generator_RowDeletedName="PerformanceDataRowDeleted" msprop:Generator_TableClassName="PerformanceDataDataTable" msprop:Generator_RowChangedName="PerformanceDataRowChanged" msprop:Generator_RowEvHandlerName="PerformanceDataRowChangeEventHandler" msprop:Generator_RowClassName="PerformanceDataRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreCompleteTransaction" msprop:Generator_ColumnVarNameInTable="columnWorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInRow="WorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInTable="WorkCentreCompleteTransactionColumn" msprop:Generator_UserColumnName="WorkCentreCompleteTransaction" type="xs:int" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Decommissioned3" msprop:Generator_UserTableName="Decommissioned3" msprop:Generator_RowEvArgName="Decommissioned3RowChangeEvent" msprop:Generator_TableVarName="tableDecommissioned3" msprop:Generator_TablePropName="Decommissioned3" msprop:Generator_RowDeletingName="Decommissioned3RowDeleting" msprop:Generator_RowChangingName="Decommissioned3RowChanging" msprop:Generator_RowDeletedName="Decommissioned3RowDeleted" msprop:Generator_TableClassName="Decommissioned3DataTable" msprop:Generator_RowChangedName="Decommissioned3RowChanged" msprop:Generator_RowEvHandlerName="Decommissioned3RowChangeEventHandler" msprop:Generator_RowClassName="Decommissioned3Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreCompleteTransaction" msprop:Generator_ColumnVarNameInTable="columnWorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInRow="WorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInTable="WorkCentreCompleteTransactionColumn" msprop:Generator_UserColumnName="WorkCentreCompleteTransaction" type="xs:int" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Decommissioned2" msprop:Generator_UserTableName="Decommissioned2" msprop:Generator_RowEvArgName="Decommissioned2RowChangeEvent" msprop:Generator_TableVarName="tableDecommissioned2" msprop:Generator_TablePropName="Decommissioned2" msprop:Generator_RowDeletingName="Decommissioned2RowDeleting" msprop:Generator_RowChangingName="Decommissioned2RowChanging" msprop:Generator_RowDeletedName="Decommissioned2RowDeleted" msprop:Generator_TableClassName="Decommissioned2DataTable" msprop:Generator_RowChangedName="Decommissioned2RowChanged" msprop:Generator_RowEvHandlerName="Decommissioned2RowChangeEventHandler" msprop:Generator_RowClassName="Decommissioned2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreCompleteTransaction" msprop:Generator_ColumnVarNameInTable="columnWorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInRow="WorkCentreCompleteTransaction" msprop:Generator_ColumnPropNameInTable="WorkCentreCompleteTransactionColumn" msprop:Generator_UserColumnName="WorkCentreCompleteTransaction" type="xs:int" minOccurs="0" />
+              <xs:element name="TransactionDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_UserColumnName="TransactionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Decommissioned1" msprop:Generator_UserTableName="Decommissioned1" msprop:Generator_RowEvArgName="Decommissioned1RowChangeEvent" msprop:Generator_TableVarName="tableDecommissioned1" msprop:Generator_TablePropName="Decommissioned1" msprop:Generator_RowDeletingName="Decommissioned1RowDeleting" msprop:Generator_RowChangingName="Decommissioned1RowChanging" msprop:Generator_RowDeletedName="Decommissioned1RowDeleted" msprop:Generator_TableClassName="Decommissioned1DataTable" msprop:Generator_RowChangedName="Decommissioned1RowChanged" msprop:Generator_RowEvHandlerName="Decommissioned1RowChangeEventHandler" msprop:Generator_RowClassName="Decommissioned1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreID" msprop:Generator_ColumnVarNameInTable="columnWorkCentreID" msprop:Generator_ColumnPropNameInRow="WorkCentreID" msprop:Generator_ColumnPropNameInTable="WorkCentreIDColumn" msprop:Generator_UserColumnName="WorkCentreID" type="xs:int" minOccurs="0" />
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BatchWorkCentreStatus" msprop:Generator_UserTableName="BatchWorkCentreStatus" msprop:Generator_RowEvArgName="BatchWorkCentreStatusRowChangeEvent" msprop:Generator_TableVarName="tableBatchWorkCentreStatus" msprop:Generator_TablePropName="BatchWorkCentreStatus" msprop:Generator_RowDeletingName="BatchWorkCentreStatusRowDeleting" msprop:Generator_RowChangingName="BatchWorkCentreStatusRowChanging" msprop:Generator_RowDeletedName="BatchWorkCentreStatusRowDeleted" msprop:Generator_TableClassName="BatchWorkCentreStatusDataTable" msprop:Generator_RowChangedName="BatchWorkCentreStatusRowChanged" msprop:Generator_RowEvHandlerName="BatchWorkCentreStatusRowChangeEventHandler" msprop:Generator_RowClassName="BatchWorkCentreStatusRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TPCOrderQuantity" msprop:Generator_ColumnVarNameInTable="columnTPCOrderQuantity" msprop:Generator_ColumnPropNameInRow="TPCOrderQuantity" msprop:Generator_ColumnPropNameInTable="TPCOrderQuantityColumn" msprop:Generator_UserColumnName="TPCOrderQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="nextWorkCentre" msprop:Generator_ColumnVarNameInTable="columnnextWorkCentre" msprop:Generator_ColumnPropNameInRow="nextWorkCentre" msprop:Generator_ColumnPropNameInTable="nextWorkCentreColumn" msprop:Generator_UserColumnName="nextWorkCentre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nextEndDate" msprop:Generator_ColumnVarNameInTable="columnnextEndDate" msprop:Generator_ColumnPropNameInRow="nextEndDate" msprop:Generator_ColumnPropNameInTable="nextEndDateColumn" msprop:Generator_UserColumnName="nextEndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="spcID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcID" msprop:Generator_ColumnPropNameInRow="spcID" msprop:Generator_ColumnPropNameInTable="spcIDColumn" msprop:Generator_UserColumnName="spcID" type="xs:int" />
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="status" msprop:Generator_ColumnVarNameInTable="columnstatus" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_ColumnPropNameInTable="statusColumn" msprop:Generator_UserColumnName="status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IntermediateStatus" msprop:Generator_ColumnVarNameInTable="columnIntermediateStatus" msprop:Generator_ColumnPropNameInRow="IntermediateStatus" msprop:Generator_ColumnPropNameInTable="IntermediateStatusColumn" msprop:Generator_UserColumnName="IntermediateStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BatchRouteActualDetails" msprop:Generator_UserTableName="BatchRouteActualDetails" msprop:Generator_RowEvArgName="BatchRouteActualDetailsRowChangeEvent" msprop:Generator_TableVarName="tableBatchRouteActualDetails" msprop:Generator_TablePropName="BatchRouteActualDetails" msprop:Generator_RowDeletingName="BatchRouteActualDetailsRowDeleting" msprop:Generator_RowChangingName="BatchRouteActualDetailsRowChanging" msprop:Generator_RowDeletedName="BatchRouteActualDetailsRowDeleted" msprop:Generator_TableClassName="BatchRouteActualDetailsDataTable" msprop:Generator_RowChangedName="BatchRouteActualDetailsRowChanged" msprop:Generator_RowEvHandlerName="BatchRouteActualDetailsRowChangeEventHandler" msprop:Generator_RowClassName="BatchRouteActualDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreID" msprop:Generator_ColumnVarNameInTable="columnWorkCentreID" msprop:Generator_ColumnPropNameInRow="WorkCentreID" msprop:Generator_ColumnPropNameInTable="WorkCentreIDColumn" msprop:Generator_UserColumnName="WorkCentreID" type="xs:int" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CommDate" msprop:Generator_ColumnVarNameInTable="columnCommDate" msprop:Generator_ColumnPropNameInRow="CommDate" msprop:Generator_ColumnPropNameInTable="CommDateColumn" msprop:Generator_UserColumnName="CommDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WkCtrPerfComment" msprop:Generator_ColumnVarNameInTable="columnWkCtrPerfComment" msprop:Generator_ColumnPropNameInRow="WkCtrPerfComment" msprop:Generator_ColumnPropNameInTable="WkCtrPerfCommentColumn" msprop:Generator_UserColumnName="WkCtrPerfComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Decommissioned" msprop:Generator_UserTableName="Decommissioned" msprop:Generator_RowEvArgName="DecommissionedRowChangeEvent" msprop:Generator_TableVarName="tableDecommissioned" msprop:Generator_TablePropName="Decommissioned" msprop:Generator_RowDeletingName="DecommissionedRowDeleting" msprop:Generator_RowChangingName="DecommissionedRowChanging" msprop:Generator_RowDeletedName="DecommissionedRowDeleted" msprop:Generator_TableClassName="DecommissionedDataTable" msprop:Generator_RowChangedName="DecommissionedRowChanged" msprop:Generator_RowEvHandlerName="DecommissionedRowChangeEventHandler" msprop:Generator_RowClassName="DecommissionedRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TPCOrderQuantity" msprop:Generator_ColumnVarNameInTable="columnTPCOrderQuantity" msprop:Generator_ColumnPropNameInRow="TPCOrderQuantity" msprop:Generator_ColumnPropNameInTable="TPCOrderQuantityColumn" msprop:Generator_UserColumnName="TPCOrderQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="spcID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcID" msprop:Generator_ColumnPropNameInRow="spcID" msprop:Generator_ColumnPropNameInTable="spcIDColumn" msprop:Generator_UserColumnName="spcID" type="xs:int" />
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="status" msprop:Generator_ColumnVarNameInTable="columnstatus" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_ColumnPropNameInTable="statusColumn" msprop:Generator_UserColumnName="status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IntermediateStatus" msprop:Generator_ColumnVarNameInTable="columnIntermediateStatus" msprop:Generator_ColumnPropNameInRow="IntermediateStatus" msprop:Generator_ColumnPropNameInTable="IntermediateStatusColumn" msprop:Generator_UserColumnName="IntermediateStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="nextWorkCentre" msprop:Generator_ColumnVarNameInTable="columnnextWorkCentre" msprop:Generator_ColumnPropNameInRow="nextWorkCentre" msprop:Generator_ColumnPropNameInTable="nextWorkCentreColumn" msprop:Generator_UserColumnName="nextWorkCentre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nextEndDate" msprop:Generator_ColumnVarNameInTable="columnnextEndDate" msprop:Generator_ColumnPropNameInRow="nextEndDate" msprop:Generator_ColumnPropNameInTable="nextEndDateColumn" msprop:Generator_UserColumnName="nextEndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkCentrePerformance" msprop:Generator_UserTableName="WorkCentrePerformance" msprop:Generator_RowEvArgName="WorkCentrePerformanceRowChangeEvent" msprop:Generator_TableVarName="tableWorkCentrePerformance" msprop:Generator_TablePropName="WorkCentrePerformance" msprop:Generator_RowDeletingName="WorkCentrePerformanceRowDeleting" msprop:Generator_RowChangingName="WorkCentrePerformanceRowChanging" msprop:Generator_RowDeletedName="WorkCentrePerformanceRowDeleted" msprop:Generator_TableClassName="WorkCentrePerformanceDataTable" msprop:Generator_RowChangedName="WorkCentrePerformanceRowChanged" msprop:Generator_RowEvHandlerName="WorkCentrePerformanceRowChangeEventHandler" msprop:Generator_RowClassName="WorkCentrePerformanceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TILShippingMemoDate" msprop:Generator_ColumnVarNameInTable="columnTILShippingMemoDate" msprop:Generator_ColumnPropNameInRow="TILShippingMemoDate" msprop:Generator_ColumnPropNameInTable="TILShippingMemoDateColumn" msprop:Generator_UserColumnName="TILShippingMemoDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ActualMinusTarget" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnActualMinusTarget" msprop:Generator_ColumnPropNameInRow="ActualMinusTarget" msprop:Generator_ColumnPropNameInTable="ActualMinusTargetColumn" msprop:Generator_UserColumnName="ActualMinusTarget" type="xs:int" minOccurs="0" />
+              <xs:element name="ShipMinusTarget" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnShipMinusTarget" msprop:Generator_ColumnPropNameInRow="ShipMinusTarget" msprop:Generator_ColumnPropNameInTable="ShipMinusTargetColumn" msprop:Generator_UserColumnName="ShipMinusTarget" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SPCItem" msprop:Generator_ColumnVarNameInTable="columnSPCItem" msprop:Generator_ColumnPropNameInRow="SPCItem" msprop:Generator_ColumnPropNameInTable="SPCItemColumn" msprop:Generator_UserColumnName="SPCItem" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="spcBatchID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcBatchID" msprop:Generator_ColumnPropNameInRow="spcBatchID" msprop:Generator_ColumnPropNameInTable="spcBatchIDColumn" msprop:Generator_UserColumnName="spcBatchID" type="xs:int" />
+              <xs:element name="RouteDataID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnRouteDataID" msprop:Generator_ColumnPropNameInRow="RouteDataID" msprop:Generator_ColumnPropNameInTable="RouteDataIDColumn" msprop:Generator_UserColumnName="RouteDataID" type="xs:int" />
+              <xs:element name="WkCtrPerfComment" msprop:Generator_ColumnVarNameInTable="columnWkCtrPerfComment" msprop:Generator_ColumnPropNameInRow="WkCtrPerfComment" msprop:Generator_ColumnPropNameInTable="WkCtrPerfCommentColumn" msprop:Generator_UserColumnName="WkCtrPerfComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CommDate" msprop:Generator_ColumnVarNameInTable="columnCommDate" msprop:Generator_ColumnPropNameInRow="CommDate" msprop:Generator_ColumnPropNameInTable="CommDateColumn" msprop:Generator_UserColumnName="CommDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BlisterLine" msprop:Generator_ColumnVarNameInTable="columnBlisterLine" msprop:Generator_ColumnPropNameInRow="BlisterLine" msprop:Generator_ColumnPropNameInTable="BlisterLineColumn" msprop:Generator_UserColumnName="BlisterLine" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkCentreID" msprop:Generator_ColumnVarNameInTable="columnWorkCentreID" msprop:Generator_ColumnPropNameInRow="WorkCentreID" msprop:Generator_ColumnPropNameInTable="WorkCentreIDColumn" msprop:Generator_UserColumnName="WorkCentreID" type="xs:int" />
+              <xs:element name="ExclCounter" msprop:Generator_ColumnVarNameInTable="columnExclCounter" msprop:Generator_ColumnPropNameInRow="ExclCounter" msprop:Generator_ColumnPropNameInTable="ExclCounterColumn" msprop:Generator_UserColumnName="ExclCounter" type="xs:int" minOccurs="0" />
+              <xs:element name="RouteDuration" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRouteDuration" msprop:Generator_ColumnPropNameInRow="RouteDuration" msprop:Generator_ColumnPropNameInTable="RouteDurationColumn" msprop:Generator_UserColumnName="RouteDuration" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SPCFullView" msprop:Generator_UserTableName="SPCFullView" msprop:Generator_RowEvArgName="SPCFullViewRowChangeEvent" msprop:Generator_TableVarName="tableSPCFullView" msprop:Generator_TablePropName="SPCFullView" msprop:Generator_RowDeletingName="SPCFullViewRowDeleting" msprop:Generator_RowChangingName="SPCFullViewRowChanging" msprop:Generator_RowDeletedName="SPCFullViewRowDeleted" msprop:Generator_TableClassName="SPCFullViewDataTable" msprop:Generator_RowChangedName="SPCFullViewRowChanged" msprop:Generator_RowEvHandlerName="SPCFullViewRowChangeEventHandler" msprop:Generator_RowClassName="SPCFullViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastWkCtrDesc" msprop:Generator_ColumnVarNameInTable="columnLastWkCtrDesc" msprop:Generator_ColumnPropNameInRow="LastWkCtrDesc" msprop:Generator_ColumnPropNameInTable="LastWkCtrDescColumn" msprop:Generator_UserColumnName="LastWkCtrDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastWkCtrTargetEndDate" msprop:Generator_ColumnVarNameInTable="columnLastWkCtrTargetEndDate" msprop:Generator_ColumnPropNameInRow="LastWkCtrTargetEndDate" msprop:Generator_ColumnPropNameInTable="LastWkCtrTargetEndDateColumn" msprop:Generator_UserColumnName="LastWkCtrTargetEndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastWkCtrActual" msprop:Generator_ColumnVarNameInTable="columnLastWkCtrActual" msprop:Generator_ColumnPropNameInRow="LastWkCtrActual" msprop:Generator_ColumnPropNameInTable="LastWkCtrActualColumn" msprop:Generator_UserColumnName="LastWkCtrActual" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="NextWkCtrDesc" msprop:Generator_ColumnVarNameInTable="columnNextWkCtrDesc" msprop:Generator_ColumnPropNameInRow="NextWkCtrDesc" msprop:Generator_ColumnPropNameInTable="NextWkCtrDescColumn" msprop:Generator_UserColumnName="NextWkCtrDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NextWkCtrTargetEndDate" msprop:Generator_ColumnVarNameInTable="columnNextWkCtrTargetEndDate" msprop:Generator_ColumnPropNameInRow="NextWkCtrTargetEndDate" msprop:Generator_ColumnPropNameInTable="NextWkCtrTargetEndDateColumn" msprop:Generator_UserColumnName="NextWkCtrTargetEndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="qualityStatus" msprop:Generator_ColumnVarNameInTable="columnqualityStatus" msprop:Generator_ColumnPropNameInRow="qualityStatus" msprop:Generator_ColumnPropNameInTable="qualityStatusColumn" msprop:Generator_UserColumnName="qualityStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TILFinalApprovalDate" msprop:Generator_ColumnVarNameInTable="columnTILFinalApprovalDate" msprop:Generator_ColumnPropNameInRow="TILFinalApprovalDate" msprop:Generator_ColumnPropNameInTable="TILFinalApprovalDateColumn" msprop:Generator_UserColumnName="TILFinalApprovalDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="HighestTransType" msprop:Generator_ColumnVarNameInTable="columnHighestTransType" msprop:Generator_ColumnPropNameInRow="HighestTransType" msprop:Generator_ColumnPropNameInTable="HighestTransTypeColumn" msprop:Generator_UserColumnName="HighestTransType" type="xs:int" minOccurs="0" />
+              <xs:element name="spcID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcID" msprop:Generator_ColumnPropNameInRow="spcID" msprop:Generator_ColumnPropNameInTable="spcIDColumn" msprop:Generator_UserColumnName="spcID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Decommissioned4" msprop:Generator_UserTableName="Decommissioned4" msprop:Generator_RowEvArgName="Decommissioned4RowChangeEvent" msprop:Generator_TableVarName="tableDecommissioned4" msprop:Generator_TablePropName="Decommissioned4" msprop:Generator_RowDeletingName="Decommissioned4RowDeleting" msprop:Generator_RowChangingName="Decommissioned4RowChanging" msprop:Generator_RowDeletedName="Decommissioned4RowDeleted" msprop:Generator_TableClassName="Decommissioned4DataTable" msprop:Generator_RowChangedName="Decommissioned4RowChanged" msprop:Generator_RowEvHandlerName="Decommissioned4RowChangeEventHandler" msprop:Generator_RowClassName="Decommissioned4Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TILShippingMemoDate" msprop:Generator_ColumnVarNameInTable="columnTILShippingMemoDate" msprop:Generator_ColumnPropNameInRow="TILShippingMemoDate" msprop:Generator_ColumnPropNameInTable="TILShippingMemoDateColumn" msprop:Generator_UserColumnName="TILShippingMemoDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ActualMinusTarget" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnActualMinusTarget" msprop:Generator_ColumnPropNameInRow="ActualMinusTarget" msprop:Generator_ColumnPropNameInTable="ActualMinusTargetColumn" msprop:Generator_UserColumnName="ActualMinusTarget" type="xs:int" minOccurs="0" />
+              <xs:element name="ShipMinusTarget" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnShipMinusTarget" msprop:Generator_ColumnPropNameInRow="ShipMinusTarget" msprop:Generator_ColumnPropNameInTable="ShipMinusTargetColumn" msprop:Generator_UserColumnName="ShipMinusTarget" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SPCItem" msprop:Generator_ColumnVarNameInTable="columnSPCItem" msprop:Generator_ColumnPropNameInRow="SPCItem" msprop:Generator_ColumnPropNameInTable="SPCItemColumn" msprop:Generator_UserColumnName="SPCItem">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="spcBatchID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnspcBatchID" msprop:Generator_ColumnPropNameInRow="spcBatchID" msprop:Generator_ColumnPropNameInTable="spcBatchIDColumn" msprop:Generator_UserColumnName="spcBatchID" type="xs:int" />
+              <xs:element name="RouteDataID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnRouteDataID" msprop:Generator_ColumnPropNameInRow="RouteDataID" msprop:Generator_ColumnPropNameInTable="RouteDataIDColumn" msprop:Generator_UserColumnName="RouteDataID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TestAndShipExcel" msprop:Generator_UserTableName="TestAndShipExcel" msprop:Generator_RowEvArgName="TestAndShipExcelRowChangeEvent" msprop:Generator_TableVarName="tableTestAndShipExcel" msprop:Generator_TablePropName="TestAndShipExcel" msprop:Generator_RowDeletingName="TestAndShipExcelRowDeleting" msprop:Generator_RowChangingName="TestAndShipExcelRowChanging" msprop:Generator_RowDeletedName="TestAndShipExcelRowDeleted" msprop:Generator_TableClassName="TestAndShipExcelDataTable" msprop:Generator_RowChangedName="TestAndShipExcelRowChanged" msprop:Generator_RowEvHandlerName="TestAndShipExcelRowChangeEventHandler" msprop:Generator_RowClassName="TestAndShipExcelRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchTrimmed" msprop:Generator_ColumnVarNameInTable="columnBatchTrimmed" msprop:Generator_ColumnPropNameInRow="BatchTrimmed" msprop:Generator_ColumnPropNameInTable="BatchTrimmedColumn" msprop:Generator_UserColumnName="BatchTrimmed" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FirstMandecDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFirstMandecDate" msprop:Generator_ColumnPropNameInRow="FirstMandecDate" msprop:Generator_ColumnPropNameInTable="FirstMandecDateColumn" msprop:Generator_UserColumnName="FirstMandecDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FinalQCTestDate" msprop:Generator_ColumnVarNameInTable="columnFinalQCTestDate" msprop:Generator_ColumnPropNameInRow="FinalQCTestDate" msprop:Generator_ColumnPropNameInTable="FinalQCTestDateColumn" msprop:Generator_UserColumnName="FinalQCTestDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FinalApprovalDate" msprop:Generator_ColumnVarNameInTable="columnFinalApprovalDate" msprop:Generator_ColumnPropNameInRow="FinalApprovalDate" msprop:Generator_ColumnPropNameInTable="FinalApprovalDateColumn" msprop:Generator_UserColumnName="FinalApprovalDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AuditComment" msprop:Generator_ColumnVarNameInTable="columnAuditComment" msprop:Generator_ColumnPropNameInRow="AuditComment" msprop:Generator_ColumnPropNameInTable="AuditCommentColumn" msprop:Generator_UserColumnName="AuditComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FirstLimsApprovalDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFirstLimsApprovalDate" msprop:Generator_ColumnPropNameInRow="FirstLimsApprovalDate" msprop:Generator_ColumnPropNameInTable="FirstLimsApprovalDateColumn" msprop:Generator_UserColumnName="FirstLimsApprovalDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="spcBatchID" msprop:Generator_ColumnVarNameInTable="columnspcBatchID" msprop:Generator_ColumnPropNameInRow="spcBatchID" msprop:Generator_ColumnPropNameInTable="spcBatchIDColumn" msprop:Generator_UserColumnName="spcBatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QCTestStartDate" msprop:Generator_ColumnVarNameInTable="columnQCTestStartDate" msprop:Generator_ColumnPropNameInRow="QCTestStartDate" msprop:Generator_ColumnPropNameInTable="QCTestStartDateColumn" msprop:Generator_UserColumnName="QCTestStartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QC_Comment" msprop:Generator_ColumnVarNameInTable="columnQC_Comment" msprop:Generator_ColumnPropNameInRow="QC_Comment" msprop:Generator_ColumnPropNameInTable="QC_CommentColumn" msprop:Generator_UserColumnName="QC_Comment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Comment_date" msprop:Generator_ColumnVarNameInTable="columnComment_date" msprop:Generator_ColumnPropNameInRow="Comment_date" msprop:Generator_ColumnPropNameInTable="Comment_dateColumn" msprop:Generator_UserColumnName="Comment_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchReviewComment" msprop:Generator_ColumnVarNameInTable="columnBatchReviewComment" msprop:Generator_ColumnPropNameInRow="BatchReviewComment" msprop:Generator_ColumnPropNameInTable="BatchReviewCommentColumn" msprop:Generator_UserColumnName="BatchReviewComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="batchReviewComm_date" msprop:Generator_ColumnVarNameInTable="columnbatchReviewComm_date" msprop:Generator_ColumnPropNameInRow="batchReviewComm_date" msprop:Generator_ColumnPropNameInTable="batchReviewComm_dateColumn" msprop:Generator_UserColumnName="batchReviewComm_date" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BatchRouteDetailsWithComments" msprop:Generator_UserTableName="BatchRouteDetailsWithComments" msprop:Generator_RowEvArgName="BatchRouteDetailsWithCommentsRowChangeEvent" msprop:Generator_TableVarName="tableBatchRouteDetailsWithComments" msprop:Generator_TablePropName="BatchRouteDetailsWithComments" msprop:Generator_RowDeletingName="BatchRouteDetailsWithCommentsRowDeleting" msprop:Generator_RowChangingName="BatchRouteDetailsWithCommentsRowChanging" msprop:Generator_RowDeletedName="BatchRouteDetailsWithCommentsRowDeleted" msprop:Generator_TableClassName="BatchRouteDetailsWithCommentsDataTable" msprop:Generator_RowChangedName="BatchRouteDetailsWithCommentsRowChanged" msprop:Generator_RowEvHandlerName="BatchRouteDetailsWithCommentsRowChangeEventHandler" msprop:Generator_RowClassName="BatchRouteDetailsWithCommentsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreDesc" msprop:Generator_ColumnVarNameInTable="columnWorkCentreDesc" msprop:Generator_ColumnPropNameInRow="WorkCentreDesc" msprop:Generator_ColumnPropNameInTable="WorkCentreDescColumn" msprop:Generator_UserColumnName="WorkCentreDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransDate" msprop:Generator_ColumnVarNameInTable="columnTransDate" msprop:Generator_ColumnPropNameInRow="TransDate" msprop:Generator_ColumnPropNameInTable="TransDateColumn" msprop:Generator_UserColumnName="TransDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="WorkCentreID" msprop:Generator_ColumnVarNameInTable="columnWorkCentreID" msprop:Generator_ColumnPropNameInRow="WorkCentreID" msprop:Generator_ColumnPropNameInTable="WorkCentreIDColumn" msprop:Generator_UserColumnName="WorkCentreID" type="xs:int" minOccurs="0" />
+              <xs:element name="BatchID" msprop:Generator_ColumnVarNameInTable="columnBatchID" msprop:Generator_ColumnPropNameInRow="BatchID" msprop:Generator_ColumnPropNameInTable="BatchIDColumn" msprop:Generator_UserColumnName="BatchID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WkCtrPerfComment" msprop:Generator_ColumnVarNameInTable="columnWkCtrPerfComment" msprop:Generator_ColumnPropNameInRow="WkCtrPerfComment" msprop:Generator_ColumnPropNameInTable="WkCtrPerfCommentColumn" msprop:Generator_UserColumnName="WkCtrPerfComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CommDate" msprop:Generator_ColumnVarNameInTable="columnCommDate" msprop:Generator_ColumnPropNameInRow="CommDate" msprop:Generator_ColumnPropNameInTable="CommDateColumn" msprop:Generator_UserColumnName="CommDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MPSPerformance" msprop:Generator_TableClassName="MPSPerformanceDataTable" msprop:Generator_TableVarName="tableMPSPerformance" msprop:Generator_TablePropName="MPSPerformance" msprop:Generator_RowDeletingName="MPSPerformanceRowDeleting" msprop:Generator_UserTableName="MPSPerformance" msprop:Generator_RowChangingName="MPSPerformanceRowChanging" msprop:Generator_RowEvHandlerName="MPSPerformanceRowChangeEventHandler" msprop:Generator_RowDeletedName="MPSPerformanceRowDeleted" msprop:Generator_RowEvArgName="MPSPerformanceRowChangeEvent" msprop:Generator_RowChangedName="MPSPerformanceRowChanged" msprop:Generator_RowClassName="MPSPerformanceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="subwkctr" msprop:Generator_ColumnVarNameInTable="columnsubwkctr" msprop:Generator_ColumnPropNameInRow="subwkctr" msprop:Generator_ColumnPropNameInTable="subwkctrColumn" msprop:Generator_UserColumnName="subwkctr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bulkitem" msprop:Generator_ColumnVarNameInTable="columnbulkitem" msprop:Generator_ColumnPropNameInRow="bulkitem" msprop:Generator_ColumnPropNameInTable="bulkitemColumn" msprop:Generator_UserColumnName="bulkitem" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="lotnumber" msprop:Generator_ColumnVarNameInTable="columnlotnumber" msprop:Generator_ColumnPropNameInRow="lotnumber" msprop:Generator_ColumnPropNameInTable="lotnumberColumn" msprop:Generator_UserColumnName="lotnumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MPSTarget" msprop:Generator_ColumnVarNameInTable="columnMPSTarget" msprop:Generator_ColumnPropNameInRow="MPSTarget" msprop:Generator_ColumnPropNameInTable="MPSTargetColumn" msprop:Generator_UserColumnName="MPSTarget" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="batchnumber" msprop:Generator_ColumnVarNameInTable="columnbatchnumber" msprop:Generator_ColumnPropNameInRow="batchnumber" msprop:Generator_ColumnPropNameInTable="batchnumberColumn" msprop:Generator_UserColumnName="batchnumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SPCTarget" msprop:Generator_ColumnVarNameInTable="columnSPCTarget" msprop:Generator_ColumnPropNameInRow="SPCTarget" msprop:Generator_ColumnPropNameInTable="SPCTargetColumn" msprop:Generator_UserColumnName="SPCTarget" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="wkCentreCompleteTrans" msprop:Generator_ColumnVarNameInTable="columnwkCentreCompleteTrans" msprop:Generator_ColumnPropNameInRow="wkCentreCompleteTrans" msprop:Generator_ColumnPropNameInTable="wkCentreCompleteTransColumn" msprop:Generator_UserColumnName="wkCentreCompleteTrans" type="xs:int" minOccurs="0" />
+              <xs:element name="LeapActual" msprop:Generator_ColumnVarNameInTable="columnLeapActual" msprop:Generator_ColumnPropNameInRow="LeapActual" msprop:Generator_ColumnPropNameInTable="LeapActualColumn" msprop:Generator_UserColumnName="LeapActual" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="batchid" msprop:Generator_ColumnVarNameInTable="columnbatchid" msprop:Generator_ColumnPropNameInRow="batchid" msprop:Generator_ColumnPropNameInTable="batchidColumn" msprop:Generator_UserColumnName="batchid" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="wkctrperfcomment" msprop:Generator_ColumnVarNameInTable="columnwkctrperfcomment" msprop:Generator_ColumnPropNameInRow="wkctrperfcomment" msprop:Generator_ColumnPropNameInTable="wkctrperfcommentColumn" msprop:Generator_UserColumnName="wkctrperfcomment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ShippingReport" msprop:Generator_TableClassName="ShippingReportDataTable" msprop:Generator_TableVarName="tableShippingReport" msprop:Generator_TablePropName="ShippingReport" msprop:Generator_RowDeletingName="ShippingReportRowDeleting" msprop:Generator_UserTableName="ShippingReport" msprop:Generator_RowChangingName="ShippingReportRowChanging" msprop:Generator_RowEvHandlerName="ShippingReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ShippingReportRowDeleted" msprop:Generator_RowEvArgName="ShippingReportRowChangeEvent" msprop:Generator_RowChangedName="ShippingReportRowChanged" msprop:Generator_RowClassName="ShippingReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MandecQty" msprop:Generator_ColumnVarNameInTable="columnMandecQty" msprop:Generator_ColumnPropNameInRow="MandecQty" msprop:Generator_ColumnPropNameInTable="MandecQtyColumn" msprop:Generator_UserColumnName="MandecQty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ShipQty" msprop:Generator_ColumnVarNameInTable="columnShipQty" msprop:Generator_ColumnPropNameInRow="ShipQty" msprop:Generator_ColumnPropNameInTable="ShipQtyColumn" msprop:Generator_UserColumnName="ShipQty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="shipDate" msprop:Generator_ColumnVarNameInTable="columnshipDate" msprop:Generator_ColumnPropNameInRow="shipDate" msprop:Generator_ColumnPropNameInTable="shipDateColumn" msprop:Generator_UserColumnName="shipDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BatchReviewComment" msprop:Generator_ColumnVarNameInTable="columnBatchReviewComment" msprop:Generator_ColumnPropNameInRow="BatchReviewComment" msprop:Generator_ColumnPropNameInTable="BatchReviewCommentColumn" msprop:Generator_UserColumnName="BatchReviewComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ShipmentComment" msprop:Generator_ColumnVarNameInTable="columnShipmentComment" msprop:Generator_ColumnPropNameInRow="ShipmentComment" msprop:Generator_ColumnPropNameInTable="ShipmentCommentColumn" msprop:Generator_UserColumnName="ShipmentComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMSentCount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSMSentCount" msprop:Generator_ColumnPropNameInRow="SMSentCount" msprop:Generator_ColumnPropNameInTable="SMSentCountColumn" msprop:Generator_UserColumnName="SMSentCount" type="xs:int" minOccurs="0" />
+              <xs:element name="COASentCount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCOASentCount" msprop:Generator_ColumnPropNameInRow="COASentCount" msprop:Generator_ColumnPropNameInTable="COASentCountColumn" msprop:Generator_UserColumnName="COASentCount" type="xs:int" minOccurs="0" />
+              <xs:element name="TPCOrderNo" msprop:Generator_ColumnVarNameInTable="columnTPCOrderNo" msprop:Generator_ColumnPropNameInRow="TPCOrderNo" msprop:Generator_ColumnPropNameInTable="TPCOrderNoColumn" msprop:Generator_UserColumnName="TPCOrderNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TILShippingMemoDate" msprop:Generator_ColumnVarNameInTable="columnTILShippingMemoDate" msprop:Generator_ColumnPropNameInRow="TILShippingMemoDate" msprop:Generator_ColumnPropNameInTable="TILShippingMemoDateColumn" msprop:Generator_UserColumnName="TILShippingMemoDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TPCOrderQuantity" msprop:Generator_ColumnVarNameInTable="columnTPCOrderQuantity" msprop:Generator_ColumnPropNameInRow="TPCOrderQuantity" msprop:Generator_ColumnPropNameInTable="TPCOrderQuantityColumn" msprop:Generator_UserColumnName="TPCOrderQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ItemDescription" msprop:Generator_ColumnVarNameInTable="columnItemDescription" msprop:Generator_ColumnPropNameInRow="ItemDescription" msprop:Generator_ColumnPropNameInTable="ItemDescriptionColumn" msprop:Generator_UserColumnName="ItemDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMSentDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSMSentDate" msprop:Generator_ColumnPropNameInRow="SMSentDate" msprop:Generator_ColumnPropNameInTable="SMSentDateColumn" msprop:Generator_UserColumnName="SMSentDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="COASentDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCOASentDate" msprop:Generator_ColumnPropNameInRow="COASentDate" msprop:Generator_ColumnPropNameInTable="COASentDateColumn" msprop:Generator_UserColumnName="COASentDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InvoiceSentCount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnInvoiceSentCount" msprop:Generator_ColumnPropNameInRow="InvoiceSentCount" msprop:Generator_ColumnPropNameInTable="InvoiceSentCountColumn" msprop:Generator_UserColumnName="InvoiceSentCount" type="xs:int" minOccurs="0" />
+              <xs:element name="InvoiceSentDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnInvoiceSentDate" msprop:Generator_ColumnPropNameInRow="InvoiceSentDate" msprop:Generator_ColumnPropNameInTable="InvoiceSentDateColumn" msprop:Generator_UserColumnName="InvoiceSentDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TPCConfirmedCollectionDate" msprop:Generator_ColumnVarNameInTable="columnTPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInRow="TPCConfirmedCollectionDate" msprop:Generator_ColumnPropNameInTable="TPCConfirmedCollectionDateColumn" msprop:Generator_UserColumnName="TPCConfirmedCollectionDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MPSExcelReport" msprop:Generator_TableClassName="MPSExcelReportDataTable" msprop:Generator_TableVarName="tableMPSExcelReport" msprop:Generator_TablePropName="MPSExcelReport" msprop:Generator_RowDeletingName="MPSExcelReportRowDeleting" msprop:Generator_UserTableName="MPSExcelReport" msprop:Generator_RowChangingName="MPSExcelReportRowChanging" msprop:Generator_RowEvHandlerName="MPSExcelReportRowChangeEventHandler" msprop:Generator_RowDeletedName="MPSExcelReportRowDeleted" msprop:Generator_RowEvArgName="MPSExcelReportRowChangeEvent" msprop:Generator_RowChangedName="MPSExcelReportRowChanged" msprop:Generator_RowClassName="MPSExcelReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="workcentredesc" msprop:Generator_ColumnVarNameInTable="columnworkcentredesc" msprop:Generator_ColumnPropNameInRow="workcentredesc" msprop:Generator_ColumnPropNameInTable="workcentredescColumn" msprop:Generator_UserColumnName="workcentredesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="subwkctr" msprop:Generator_ColumnVarNameInTable="columnsubwkctr" msprop:Generator_ColumnPropNameInRow="subwkctr" msprop:Generator_ColumnPropNameInTable="subwkctrColumn" msprop:Generator_UserColumnName="subwkctr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bulkitem" msprop:Generator_ColumnVarNameInTable="columnbulkitem" msprop:Generator_ColumnPropNameInRow="bulkitem" msprop:Generator_ColumnPropNameInTable="bulkitemColumn" msprop:Generator_UserColumnName="bulkitem" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="lotnumber" msprop:Generator_ColumnVarNameInTable="columnlotnumber" msprop:Generator_ColumnPropNameInRow="lotnumber" msprop:Generator_ColumnPropNameInTable="lotnumberColumn" msprop:Generator_UserColumnName="lotnumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MPSDate" msprop:Generator_ColumnVarNameInTable="columnMPSDate" msprop:Generator_ColumnPropNameInRow="MPSDate" msprop:Generator_ColumnPropNameInTable="MPSDateColumn" msprop:Generator_UserColumnName="MPSDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MPSUpload_date" msprop:Generator_ColumnVarNameInTable="columnMPSUpload_date" msprop:Generator_ColumnPropNameInRow="MPSUpload_date" msprop:Generator_ColumnPropNameInTable="MPSUpload_dateColumn" msprop:Generator_UserColumnName="MPSUpload_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="intermediate_status" msprop:Generator_ColumnVarNameInTable="columnintermediate_status" msprop:Generator_ColumnPropNameInRow="intermediate_status" msprop:Generator_ColumnPropNameInTable="intermediate_statusColumn" msprop:Generator_UserColumnName="intermediate_status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="mandec_date" msprop:Generator_ColumnVarNameInTable="columnmandec_date" msprop:Generator_ColumnPropNameInRow="mandec_date" msprop:Generator_ColumnPropNameInTable="mandec_dateColumn" msprop:Generator_UserColumnName="mandec_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MPSminusMANDEC" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnMPSminusMANDEC" msprop:Generator_ColumnPropNameInRow="MPSminusMANDEC" msprop:Generator_ColumnPropNameInTable="MPSminusMANDECColumn" msprop:Generator_UserColumnName="MPSminusMANDEC" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ExceptionReport" msprop:Generator_TableClassName="ExceptionReportDataTable" msprop:Generator_TableVarName="tableExceptionReport" msprop:Generator_TablePropName="ExceptionReport" msprop:Generator_RowDeletingName="ExceptionReportRowDeleting" msprop:Generator_UserTableName="ExceptionReport" msprop:Generator_RowChangingName="ExceptionReportRowChanging" msprop:Generator_RowEvHandlerName="ExceptionReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ExceptionReportRowDeleted" msprop:Generator_RowEvArgName="ExceptionReportRowChangeEvent" msprop:Generator_RowChangedName="ExceptionReportRowChanged" msprop:Generator_RowClassName="ExceptionReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WkCtrPerfComment" msprop:Generator_ColumnVarNameInTable="columnWkCtrPerfComment" msprop:Generator_ColumnPropNameInRow="WkCtrPerfComment" msprop:Generator_ColumnPropNameInTable="WkCtrPerfCommentColumn" msprop:Generator_UserColumnName="WkCtrPerfComment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Batchid" msprop:Generator_ColumnVarNameInTable="columnBatchid" msprop:Generator_ColumnPropNameInRow="Batchid" msprop:Generator_ColumnPropNameInTable="BatchidColumn" msprop:Generator_UserColumnName="Batchid" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WkCtrID" msprop:Generator_ColumnVarNameInTable="columnWkCtrID" msprop:Generator_ColumnPropNameInRow="WkCtrID" msprop:Generator_ColumnPropNameInTable="WkCtrIDColumn" msprop:Generator_UserColumnName="WkCtrID" type="xs:int" minOccurs="0" />
+              <xs:element name="CommUser" msprop:Generator_ColumnVarNameInTable="columnCommUser" msprop:Generator_ColumnPropNameInRow="CommUser" msprop:Generator_ColumnPropNameInTable="CommUserColumn" msprop:Generator_UserColumnName="CommUser" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="commentdate" msprop:Generator_ColumnVarNameInTable="columncommentdate" msprop:Generator_ColumnPropNameInRow="commentdate" msprop:Generator_ColumnPropNameInTable="commentdateColumn" msprop:Generator_UserColumnName="commentdate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="workcentredesc" msprop:Generator_ColumnVarNameInTable="columnworkcentredesc" msprop:Generator_ColumnPropNameInRow="workcentredesc" msprop:Generator_ColumnPropNameInTable="workcentredescColumn" msprop:Generator_UserColumnName="workcentredesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="transactiondate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntransactiondate" msprop:Generator_ColumnPropNameInRow="transactiondate" msprop:Generator_ColumnPropNameInTable="transactiondateColumn" msprop:Generator_UserColumnName="transactiondate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:BatchDetails" />
+      <xs:field xpath="mstns:spcBatchID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
