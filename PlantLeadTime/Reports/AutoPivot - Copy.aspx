@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/PLT.master" AutoEventWireup="false" CodeFile="AutoPivot.aspx.vb" Inherits="PlantLeadTime_Reports_AutoPivot" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/PLT.master" AutoEventWireup="false" CodeFile="AutoPivot - Copy.aspx.vb" Inherits="PlantLeadTime_Reports_AutoPivot" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
-        AutoGenerateColumns="False" EnableModelValidation="True">
+        AutoGenerateColumns="False" DataSourceID="odsAutoPivot">
         <Columns>
             <asp:BoundField DataField="BatchNo" HeaderText="BatchNo" 
                 SortExpression="BatchNo" />
@@ -56,6 +56,13 @@
                 HeaderText="410" SortExpression="410" />
         </Columns>
     </asp:GridView>
-    <br />
+    <asp:ObjectDataSource ID="odsAutoPivot" runat="server" 
+        OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" 
+        TypeName="PLTReportingTableAdapters.AllRouteTransTableAutoRandomStartPivotTableAdapter">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="routeID" QueryStringField="routeID" 
+                Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
 </asp:Content>
 
