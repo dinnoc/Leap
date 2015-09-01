@@ -353,7 +353,7 @@
                                     <asp:DetailsView ID="dvEditInsert" runat="server" AutoGenerateRows="False" BackColor="White"
                                         BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="spcID"
                                         DataSourceID="odsSPCDetails" DefaultMode="Edit" GridLines="Horizontal" Height="50px"
-                                        Width="100%">
+                                        Width="100%" EnableModelValidation="True">
                                         <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
                                         <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" />
                                         <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
@@ -463,6 +463,7 @@
                                             <asp:Parameter Name="AuditChangeDate" Type="DateTime" />
                                             <asp:Parameter Name="AuditUser" Type="Int32" />
                                             <asp:Parameter Name="AuditComment" Type="String" />
+                                            <asp:Parameter Name="AuditUserLogin" Type="String" />
                                             <asp:Parameter Name="Original_spcID" Type="Int32" />
                                         </UpdateParameters>
                                         <SelectParameters>
@@ -487,6 +488,7 @@
                                             <asp:Parameter Name="AuditChangeDate" Type="DateTime" />
                                             <asp:Parameter Name="AuditUser" Type="Int32" />
                                             <asp:Parameter Name="AuditComment" Type="String" />
+                                            <asp:Parameter Name="AuditUserLogin" Type="String" />
                                         </InsertParameters>
                                     </asp:ObjectDataSource>
                                 </td>
